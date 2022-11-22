@@ -64,5 +64,6 @@ enum OrderStatus {
   PENDING
   RECEIVED
   COMPLETED
+  DELIVERED
   CANCELLED
 }
