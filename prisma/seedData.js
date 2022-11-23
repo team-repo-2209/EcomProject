@@ -38,10 +38,17 @@ const users = [
 
 const orders = [
   {
-    orderNumber: 001,
-    orderStatus: "RECIEVED",
+    isCompleted: false,
     isCart: false,
     userId: 1,
+  },
+];
+
+const categories = [
+  {
+    name: "Anime",
+    description: "An anime inspired NFT for the avengers!",
+    imageUrl: "https//www.google.com",
   },
 ];
 
@@ -51,23 +58,27 @@ const products = [
     description: "A rare NFT from the first avengers movie!",
     price: 500,
     isAvailable: true,
-    imageURL: "https//www.google.com",
+    imageUrl: "https//www.google.com",
+    categoryId: 01,
+  },
+  {
+    productName: "Avengers NFT 2",
+    description: "A rare NFT from the first avengers movie!",
+    price: 500,
+    isAvailable: true,
+    imageUrl: "https//www.google.com",
     categoryId: 01,
   },
 ];
 
 const order_products = [
   {
-    productId: 12345,
-    orderId: 001,
+    productId: 1,
+    orderId: 1,
   },
-];
-
-const categories = [
   {
-    name: "Anime",
-    description: "An anime inspired NFT for the avengers!",
-    imageURL: "https//www.google.com",
+    productId: 2,
+    orderId: 1,
   },
 ];
 

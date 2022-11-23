@@ -23,12 +23,18 @@ model Users {
 
 model Orders {
   id Int @id @default(autoincrement())
-  orderNumber Int?
-  orderStatus OrderStatus @default(OPEN)
+  isCompleted Boolean? @default(false)
   isCart Boolean? @default(false)
   userId Int
   users Users? @relation(fields: [userId], references: [id])
   order_products Order_Products[]
+}
+model Categories {
+  id Int @id @default(autoincrement())
+  name String 
+  description String
+  imageUrl String
+  products Products[]
 }
 
 model Products {
@@ -45,25 +51,11 @@ model Products {
 
 model Order_Products{
   id Int @id @default(autoincrement())
-  productId Int
-  orderId Int
+  productId Int?
+  orderId Int?
   products Products? @relation(fields: [productId], references: [id])
   orders Orders? @relation(fields: [orderId], references: [id])
 }
 
-model Categories {
-  id Int @id @default(autoincrement())
-  name String 
-  description String
-  imageUrl String
-  products Products[]
-}
 
-enum OrderStatus {
-  OPEN
-  PENDING
-  RECEIVED
-  COMPLETED
-  DELIVERED
-  CANCELLED
-}
+
