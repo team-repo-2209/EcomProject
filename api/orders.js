@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const { asyncErrorHandler } = require("./utils");
 const prisma = require("../prisma/prisma");
-// const { authRequired } = require("./auth");
+const { authRequired } = require("./auth");
 
 router.get(
   "/",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const orders = await prisma.orders.findMany();
     res.send(orders);
@@ -13,6 +14,7 @@ router.get(
 
 router.get(
   "/:orderId",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const order = await prisma.orders.findUnique({
       where: {
@@ -25,6 +27,7 @@ router.get(
 
 router.patch(
   "/:orderId",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const updatedOrder = await prisma.orders.update({
       where: {
@@ -38,6 +41,7 @@ router.patch(
 
 router.post(
   "/",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const newOrder = await prisma.orders.create({
       data: req.body,
@@ -48,6 +52,7 @@ router.post(
 
 router.delete(
   "/:orderId",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const deletedOrder = await prisma.orders.delete({
       where: {
