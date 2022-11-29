@@ -33,7 +33,6 @@ model Categories {
   id Int @id @default(autoincrement())
   name String 
   description String
-  imageUrl String
   products Products[]
 }
 
