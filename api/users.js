@@ -1,9 +1,15 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const router = require("express").Router();
 const { asyncErrorHandler } = require("./utils");
+const { JWT_SECRET } = process.env;
 const prisma = require("../prisma/prisma");
+const SALT_ROUNDS = 10;
+const { authRequired } = require("./auth");
 
 router.get(
   "/",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const users = await prisma.users.findMany();
     res.send(users);
@@ -11,11 +17,25 @@ router.get(
 );
 
 router.post(
-  "/",
+  "/register",
   asyncErrorHandler(async (req, res, next) => {
-    const createUser = await prisma.users.create({
+    const { email, username, password, firstname, lastname, phoneNumber } =
+      req.body;
+    // const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    const newUser = await prisma.users.create({
       data: req.body,
     });
+
+    delete newUser.password;
+
+    const token = jwt.sign(newUser, JWT_SECRET);
+
+    res.cookie("token", token, {
+      sameSite: "strict",
+      httpOnly: true,
+      signed: true,
+    });
+    console.log("token:", token);
     res.send(newUser);
   })
 );
@@ -33,12 +53,21 @@ router.patch(
   })
 );
 
-router.fetch(
-  "/:userId",
+router.get(
+  "/me",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
-    const user = await prisma.user.findUnique({
+    res.send(req.user);
+  })
+);
+
+router.get(
+  "/:userId",
+  authRequired,
+  asyncErrorHandler(async (req, res, next) => {
+    const user = await prisma.users.findUnique({
       where: {
-        id: +req.params.orderId,
+        id: +req.params.userId,
       },
     });
     res.send(user);
@@ -47,6 +76,7 @@ router.fetch(
 
 router.delete(
   "/:userId",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const deleteUser = await prisma.users.delete({
       where: {
@@ -57,22 +87,51 @@ router.delete(
   })
 );
 
-router.post("/login", asyncErrorHandler, async (req, res, next) => {
-  const { username, password } = data;
-  const user = await prisma.users.findUnique({
-    where: {
-      username,
-    },
-  });
-  if (!user) {
-    throw createError.NotFound("User is not registered");
+router.post(
+  "/login",
+  asyncErrorHandler(async (req, res, next) => {
+    const { username, password } = req.body;
+    const user = await prisma.users.findUnique({
+      where: {
+        username,
+      },
+    });
+    console.log(user);
+    const checkPassword = bcrypt.compare(password, user.password);
+
+    if (checkPassword) {
+      delete user.password;
+      const token = jwt.sign(user, JWT_SECRET);
+
+      res.cookie("token", token, {
+        sameSite: "strict",
+        httpOnly: true,
+        signed: true,
+      });
+
+      res.send({ user });
+    } else
+      next({
+        name: "Invaild Login",
+        message: "Username or Password is incorrect",
+      });
+  })
+);
+
+router.post("/logout", async (req, res, next) => {
+  try {
+    res.clearCookie("token", {
+      sameSite: "strict",
+      httpOnly: true,
+      signed: true,
+    });
+    res.send({
+      loggedIn: false,
+      message: "Logged Out",
+    });
+  } catch (error) {
+    next(error);
   }
-  const checkPassword = bcrypt.compareSync(password, user.password);
-  if (!checkPassword)
-    throw createError.Unauthorized("Username or password is not valid");
-  delete user.password;
-  const accessToken = await jwt.signAccessToken(user);
-  return { ...user, accessToken };
 });
 
 module.exports = router;

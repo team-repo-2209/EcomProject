@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { asyncErrorHandler } = require("./utils");
 const prisma = require("../prisma/prisma");
+const { authRequired } = require("./auth");
 
 router.get(
   "/",
@@ -24,6 +25,7 @@ router.get(
 
 router.patch(
   "/:productId",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const updateProduct = await prisma.products.update({
       where: {
@@ -37,6 +39,7 @@ router.patch(
 
 router.post(
   "/",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const newProduct = await prisma.products.create({
       data: req.body,
@@ -47,6 +50,7 @@ router.post(
 
 router.delete(
   "/:productId",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const deletedProduct = await prisma.products.delete({
       where: {
