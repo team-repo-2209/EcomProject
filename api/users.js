@@ -42,6 +42,7 @@ router.post(
 
 router.patch(
   "/:userId",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const updateUser = await prisma.users.update({
       where: {
