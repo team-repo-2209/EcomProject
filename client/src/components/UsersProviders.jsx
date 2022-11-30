@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchMe } from "../api/users";
-import UsersContext from "../context/UsersContext";
+import UsersContext from "../context/UsersConext";
 
 export default function UsersProviders({ children }) {
   const [user, setUser] = useState({ user: "Guest" });
