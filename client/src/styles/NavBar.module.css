@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
 
 .background {
-  background-color: rgb(80, 77, 250);
+  background-color: rgb(205, 79, 68);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 9vh;
+  height: 17vh;
   display: flex;
   justify-content: space-between;
   align-content: flex-start;

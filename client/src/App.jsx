@@ -2,6 +2,7 @@ import "./App.css";
 import useUsers from "./hooks/UseUsers";
 import NavBar from "./components/NavBar";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Products from "./components/Products";
 
 function App() {
   const { user } = useUsers();
@@ -9,6 +10,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <NavBar user={user} />
+        <Routes>
+          <Route path="/" element={<Products />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
