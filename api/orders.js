@@ -1,7 +1,6 @@
 const router = require("express").Router();
-const { asyncErrorHandler } = require("./utils");
+const { asyncErrorHandler, authRequired } = require("./utils");
 const prisma = require("../prisma/prisma");
-const { authRequired } = require("./auth");
 
 router.get(
   "/",
@@ -12,6 +11,8 @@ router.get(
   })
 );
 
+// Need to Join Order_Products, and then Join the Products
+// INCLUDE
 router.get(
   "/:orderId",
   authRequired,
@@ -19,6 +20,13 @@ router.get(
     const order = await prisma.orders.findUnique({
       where: {
         id: +req.params.orderId,
+      },
+      include: {
+        order_products: {
+          include: {
+            products: true,
+          },
+        },
       },
     });
     res.send(order);
