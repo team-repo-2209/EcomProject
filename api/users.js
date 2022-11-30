@@ -21,10 +21,19 @@ router.post(
   asyncErrorHandler(async (req, res, next) => {
     const { email, username, password, firstname, lastname, phoneNumber } =
       req.body;
-    // const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     const newUser = await prisma.users.create({
-      data: req.body,
+      data: {
+        email,
+        username,
+        password: hashedPassword,
+        firstname,
+        lastname,
+        phoneNumber,
+      },
     });
+
+    // Create your cart after you create the user. User the newUser.id as the order's userId
 
     delete newUser.password;
 
@@ -97,6 +106,8 @@ router.post(
         username,
       },
     });
+    // Check if there isn't a user with that username,
+    // if there isn't send a specific error message to next saying, that is not a user
     console.log(user);
     const checkPassword = bcrypt.compare(password, user.password);
 

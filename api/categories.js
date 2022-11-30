@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { asyncErrorHandler } = require("./utils");
 const prisma = require("../prisma/prisma");
-const { authRequired } = require("./auth");
+const { authRequired } = require("./utils");
 
 router.get(
   "/",
@@ -24,7 +24,8 @@ router.get(
 );
 
 router.patch(
-  "/:categoryId", authRequired,
+  "/:categoryId",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const updatedCategory = await prisma.categories.update({
       where: {
@@ -37,7 +38,8 @@ router.patch(
 );
 
 router.post(
-  "/", authRequired,
+  "/",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const newCategory = await prisma.categories.create({
       data: req.body,
@@ -47,7 +49,8 @@ router.post(
 );
 
 router.delete(
-  "/:categoryId", authRequired,
+  "/:categoryId",
+  authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const deletedCategory = await prisma.categories.delete({
       where: {

@@ -1,7 +1,6 @@
 const router = require("express").Router();
-const { asyncErrorHandler } = require("./utils");
+const { asyncErrorHandler, authRequired } = require("./utils");
 const prisma = require("../prisma/prisma");
-const { authRequired } = require("./auth");
 
 router.get(
   "/",
@@ -27,17 +26,21 @@ router.get(
 
 //TEST!!!!
 router.post(
-  "/",
+  "/:orderId/:productId",
   authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const newOrderProduct = await prisma.Order_Products.create({
-      data: req.body,
+      data: {
+        orderId: +req.params.orderId,
+        productId: +req.params.productId,
+      },
     });
     res.send(newOrderProduct);
   })
 );
 
 //TEST!!!!
+// ! Refactor url route to include orderId and ProductId
 router.patch(
   "/:order_productId",
   authRequired,
@@ -51,7 +54,7 @@ router.patch(
     res.send(updatedOrderProduct);
   })
 );
-
+// ! Refactor url route to include orderId and ProductId
 router.delete(
   "/:order_productId",
   authRequired,
