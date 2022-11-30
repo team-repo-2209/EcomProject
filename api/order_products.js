@@ -40,28 +40,28 @@ router.post(
 );
 
 //TEST!!!!
-// ! Refactor url route to include orderId and ProductId
 router.patch(
-  "/:order_productId",
+  "/:orderId/:productId",
   authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const updatedOrderProduct = await prisma.Order_Products.update({
       where: {
-        id: +req.params.order_productId,
+        orderId: +req.params.orderId,
+        productId: +req.params.productId,
       },
-      data: req.body,
     });
     res.send(updatedOrderProduct);
   })
 );
-// ! Refactor url route to include orderId and ProductId
+
 router.delete(
-  "/:order_productId",
+  "/:orderId/:productId",
   authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const deletedOrderProduct = await prisma.Order_Products.delete({
       where: {
-        id: +req.params.order_productId,
+        orderId: +req.params.orderId,
+        productId: +req.params.orderId,
       },
     });
     res.send(deletedOrderProduct);
