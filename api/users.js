@@ -6,6 +6,7 @@ const { JWT_SECRET } = process.env;
 const prisma = require("../prisma/prisma");
 const SALT_ROUNDS = 10;
 const { authRequired } = require("./auth");
+const e = require("cors");
 
 router.get(
   "/",
@@ -101,6 +102,7 @@ router.post(
   "/login",
   asyncErrorHandler(async (req, res, next) => {
     const { username, password } = req.body;
+    console.log("username", username);
     const user = await prisma.users.findUnique({
       where: {
         username,
@@ -109,24 +111,27 @@ router.post(
     // Check if there isn't a user with that username,
     // if there isn't send a specific error message to next saying, that is not a user
     console.log(user);
-    const checkPassword = bcrypt.compare(password, user.password);
+    if (user) {
+      const checkPassword = bcrypt.compare(password, user.password);
 
-    if (checkPassword) {
-      delete user.password;
-      const token = jwt.sign(user, JWT_SECRET);
+      if (checkPassword) {
+        delete user.password;
+        const token = jwt.sign(user, JWT_SECRET);
 
-      res.cookie("token", token, {
-        sameSite: "strict",
-        httpOnly: true,
-        signed: true,
-      });
+        res.cookie("token", token, {
+          sameSite: "strict",
+          httpOnly: true,
+          signed: true,
+        });
 
-      res.send({ user });
-    } else
-      next({
-        name: "Invaild Login",
-        message: "Username or Password is incorrect",
-      });
+        res.send({ user });
+      } else {
+        next({
+          name: "Invaild Login",
+          message: "Username or Password is incorrect",
+        });
+      }
+    }
   })
 );
 

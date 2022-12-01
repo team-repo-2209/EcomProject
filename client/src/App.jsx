@@ -6,6 +6,7 @@ import Products from "./components/Products";
 import SingleProduct from "./components/SingleProduct";
 // import MyProfile from "./components/MyProfile";
 import Register from "./components/Register";
+import Login from "./components/Login";
 
 function App() {
   const { user } = useUsers();
@@ -19,6 +20,7 @@ function App() {
           {/* <Route path="/MyProfile" element={<MyProfile />} /> */}
           <Route path="/products/:productId" element={<SingleProduct />} />
           <Route path="/user/register" element={<Register />} />
+          <Route path="/user/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>

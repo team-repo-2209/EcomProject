@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchMe } from "../api/users";
+import { registerUser } from "../api/users";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ export default function Register() {
         onSubmit={async (event) => {
           event.preventDefault();
 
-          const result = await fetchMe(
+          const result = await registerUser(
             email,
             username,
             password,
@@ -35,6 +35,7 @@ export default function Register() {
             setFirstname("");
             setLastname("");
             setPhoneNumber("");
+            navigate("/");
             console.log("Error when registering this user");
           } else {
             console.log("This works!");
@@ -50,7 +51,7 @@ export default function Register() {
         <input
           value={username}
           onChange={(event) => setUsername(event.target.value)}
-          placeholder="Enter a Username"
+          placeholder="Enter a username"
         />
 
         <input
