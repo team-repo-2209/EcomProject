@@ -5,8 +5,8 @@ const { authRequired, asyncErrorHandler } = require("./utils");
 router.get(
   "/",
   asyncErrorHandler(async (req, res, next) => {
-    const products = await prisma.products.findMany();
-    res.send(products);
+    const allProducts = await prisma.products.findMany();
+    res.send(allProducts);
   })
 );
 
