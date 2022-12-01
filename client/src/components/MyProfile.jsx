@@ -6,6 +6,7 @@ import { fetchMe, updateUser } from "../api/users";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+// import WalletCard from "./WalletCard";
 
 export default function MyProfile() {
   const { user } = useUsers();
@@ -107,6 +108,7 @@ export default function MyProfile() {
         </Form.Group>
         <Button variant="secondary">Change</Button>
       </Form>
+      {/* <WalletCard /> */}
     </div>
   );
 }
