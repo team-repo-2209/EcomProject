@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+@import url("https://fonts.cdnfonts.com/css/marvel");
 
 .background {
-  background-color: rgb(205, 79, 68);
+  background-color: rgb(202, 51, 38);
   position: fixed;
   top: 0;
   left: 0;
@@ -10,33 +10,50 @@
   display: flex;
   justify-content: space-between;
   align-content: flex-start;
-  overflow: auto;
   min-height: 120px;
   border-bottom: 2px solid black;
 }
 
 .text {
   margin-left: 5vh;
-  margin-top: 4vh;
+  margin-top: 7vh;
   margin-right: 3vh;
-  color: white;
+  color: rgb(253, 252, 252);
   display: flex;
   align-items: flex-end;
-  font-family: Merriweather;
+  font-family: "Marvel", sans-serif;
+  font-size: larger;
 }
 
 .text:hover {
-  color: black;
+  color: rgb(17, 40, 104);
 }
 
 .welcome {
   color: white;
   margin-top: 0px;
   text-decoration: none;
-  font-size: large;
+  font-size: xx-large;
   font-family: Merriweather;
 }
 
 .header {
   margin-left: 15px;
+}
+
+.searchbar {
+  margin-left: 3vh;
+  margin-top: 2vh;
+  font-family: "Marvel", sans-serif;
+  width: 30vh;
+}
+
+.home {
+  margin-right: 20vh;
+  margin-top: 5vh;
+}
+
+.dropdown {
+  margin-top: 7vh;
+  font-family: "Marvel", sans-serif;
 }

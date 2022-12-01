@@ -17,14 +17,16 @@ export default function Products() {
   }, []);
 
   return (
-    <div className={styles.background}>
+    <div className={styles.Products}>
       {products?.map((product) => {
         return (
           <div className={styles.box} key={product.id}>
+            <img className={styles.img} src={product.imageUrl} />
             <h6>{product.productName}</h6>
             <h6>${product.price}</h6>
 
             <button
+              className={styles.button}
               onClick={() => {
                 navigate(`/products/${product.id}`);
               }}
