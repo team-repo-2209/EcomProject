@@ -2,17 +2,19 @@ import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { logoutUser } from "../api/users";
 import logo from "../styles/logo.png";
 import styles from "../styles/NavBar.module.css";
 
 function NavBar({ user }) {
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
   if (user.user === "Guest") {
     return (
       <Navbar className={styles.background}>
         <div className={styles.header}>
-          <img src={logo} height={110} width={150} alt="Logo" />
+          <img src={logo} height={100} width={150} alt="Logo" />
           <Link className={styles.welcome} to="/">
             {" "}
           </Link>
@@ -22,6 +24,15 @@ function NavBar({ user }) {
             Home
           </Link>
         </Nav.Item>{" "}
+        <Nav.Item>
+          <input
+            className={styles.search}
+            type="text"
+            value={searchTerm}
+            placeholder="Search..."
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </Nav.Item>
         <Nav.Item>
           <Link className={styles.text} to="/Categories">
             Category
@@ -52,7 +63,7 @@ function NavBar({ user }) {
     <>
       <Navbar className={styles.background}>
         <div className={styles.header}>
-          <img src={logo} height={110} width={150} alt="Logo" />
+          <img src={logo} height={100} width={150} alt="Logo" />
           <Link className={styles.welcome} to="/">
             {" "}
           </Link>
