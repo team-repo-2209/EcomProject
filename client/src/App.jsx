@@ -6,7 +6,6 @@ import Products from "./components/Products";
 import MyProfile from "./components/MyProfile";
 import Register from "./components/Register";
 
-
 function App() {
   const { user } = useUsers();
   return (
@@ -18,8 +17,7 @@ function App() {
 
           {/* <Route path="/MyProfile" element={<MyProfile />} /> */}
 
-          <Route path="/" element={<Register />} />
-
+          <Route path="/user/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>
