@@ -7,6 +7,7 @@ import { logoutUser } from "../api/users";
 import logo from "../styles/logo.png";
 import styles from "../styles/NavBar.module.css";
 
+
 function NavBar({ user }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,7 +18,7 @@ function NavBar({ user }) {
           <img src={logo} height={100} width={150} alt="Logo" />
           <Link className={styles.welcome} to="/">
             {" "}
-          </Link>
+          </Link> 
         </div>
         <Nav.Item>
           <Link className={styles.text} to="/">
