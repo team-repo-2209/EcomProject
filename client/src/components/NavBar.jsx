@@ -5,12 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { logoutUser } from "../api/users";
 import logo from "../styles/logo.png";
+import home from "../styles/home.png";
 import styles from "../styles/NavBar.module.css";
-
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 function NavBar({ user }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+
   if (user.user === "Guest") {
     return (
       <Navbar className={styles.background}>
@@ -18,26 +21,38 @@ function NavBar({ user }) {
           <img src={logo} height={100} width={150} alt="Logo" />
           <Link className={styles.welcome} to="/">
             {" "}
-          </Link> 
+          </Link>
+        </div>
+        <div className={styles.search}>
+          <Nav.Item>
+            <Link className={styles.home} to="/">
+              <img src={home} height={40} width={40} alt="Logo" />
+            </Link>
+          </Nav.Item>{" "}
+          <Nav.Item>
+            <input
+              className={styles.searchbar}
+              type="text"
+              value={searchTerm}
+              placeholder="Search..."
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </Nav.Item>
         </div>
         <Nav.Item>
-          <Link className={styles.text} to="/">
-            Home
-          </Link>
-        </Nav.Item>{" "}
-        <Nav.Item>
-          <input
-            className={styles.search}
-            type="text"
-            value={searchTerm}
-            placeholder="Search..."
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </Nav.Item>
-        <Nav.Item>
-          <Link className={styles.text} to="/Categories">
-            Category
-          </Link>
+          <div className={styles.dropdown}>
+            <DropdownButton id="dropdown-item-button" title="Category">
+              <Dropdown.Item as="button">
+                <Link to="/Category/Anime">Anime</Link>
+              </Dropdown.Item>
+              <Dropdown.Item as="button">
+                <Link to="/Category/Cartoon">Cartoon</Link>
+              </Dropdown.Item>
+              <Dropdown.Item as="button">
+                <Link to="/Category/LiveAction">Live Action</Link>
+              </Dropdown.Item>
+            </DropdownButton>
+          </div>
         </Nav.Item>
         {user.user === "Guest" ? (
           <>
