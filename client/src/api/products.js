@@ -1,5 +1,4 @@
 export async function fetchProducts() {
-
   const response = await fetch("/api/products");
   const result = await response.json();
   return result;
@@ -7,7 +6,7 @@ export async function fetchProducts() {
 
 export async function fetchProductById(id) {
   const response = await fetch(`/api/products/${id}`);
-  const result = await response.jon();
+  const result = await response.json();
   return result;
 }
 
