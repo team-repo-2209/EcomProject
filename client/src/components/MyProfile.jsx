@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import useUsers from "../hooks/UseUsers";
 import { fetchMe, updateUser } from "../api/users";
+import WalletCard from "./WalletCard";
+import CreateProduct from "./CreateProduct";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import WalletCard from "./WalletCard";
 import Card from "react-bootstrap/Card";
 
 export default function MyProfile() {
@@ -85,10 +86,10 @@ export default function MyProfile() {
             <Form.Label>Password</Form.Label>
             <Form.Control
               value={password}
-              type="text"
-              placeholder="Please Enter a New Password."
+              type="password"
+              placeholder="Please Enter a New Password"
               onChange={(e) => {
-                setFirstname(e.target.value);
+                setPassword(e.target.value);
               }}
             />
             <Form.Label>Lastname</Form.Label>
@@ -115,6 +116,7 @@ export default function MyProfile() {
       </Card>
       <div>
         <WalletCard />
+        <CreateProduct />
       </div>
     </div>
   );
