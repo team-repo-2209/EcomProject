@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../api/users";
+import styles from "../styles/Register.module.css";
+import Button from "react-bootstrap/Button";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -13,8 +15,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className={styles.background}>
       <form
         onSubmit={async (event) => {
           event.preventDefault();
@@ -42,44 +43,55 @@ export default function Register() {
           }
         }}
       >
-        <input
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="Enter your email"
-        />
-
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-          placeholder="Enter a username"
-        />
-
-        <input
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder="Enter a password"
-          type="password"
-        />
-
-        <input
-          value={firstname}
-          onChange={(event) => setFirstname(event.target.value)}
-          placeholder="Enter your first name"
-        />
-
-        <input
-          value={lastname}
-          onChange={(event) => setLastname(event.target.value)}
-          placeholder="Enter your last name"
-        />
-
-        <input
-          value={phoneNumber}
-          onChange={(event) => setPhoneNumber(event.target.value)}
-          placeholder="Enter your phone number"
-        />
-
-        <button>Submit</button>
+        <div className={styles.log}>
+          <h2>Register</h2>
+          <h6>Email:</h6>
+          <input
+            className={styles.input}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="Enter your email"
+          />
+          <h6>Username:</h6>
+          <input
+            className={styles.input}
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+            placeholder="Enter a username"
+          />
+          <h6>Password (must be 8 character or longer):</h6>
+          <input
+            className={styles.input}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder="Enter a password"
+            type="password"
+          />
+          <h6>First Name:</h6>
+          <input
+            className={styles.input}
+            value={firstname}
+            onChange={(event) => setFirstname(event.target.value)}
+            placeholder="Enter your first name"
+          />
+          <h6>Last Name:</h6>
+          <input
+            className={styles.input}
+            value={lastname}
+            onChange={(event) => setLastname(event.target.value)}
+            placeholder="Enter your last name"
+          />
+          <h6>Phone Number:</h6>
+          <input
+            className={styles.input}
+            value={phoneNumber}
+            onChange={(event) => setPhoneNumber(event.target.value)}
+            placeholder="Enter your phone number"
+          />
+          <div>
+            <Button type="submit">Register</Button>
+          </div>
+        </div>
       </form>
     </div>
   );

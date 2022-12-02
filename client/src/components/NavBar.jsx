@@ -153,6 +153,7 @@ function NavBar({ user }) {
           <Link
             className={styles.text}
             onClick={async () => {
+              localStorage.removeItem("user");
               await logoutUser();
               navigate("/user/login");
             }}
