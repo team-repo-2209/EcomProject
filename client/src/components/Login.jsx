@@ -41,10 +41,11 @@ export default function Login() {
           type="text"
           placeholder="username"
         />
+
         <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          type="text"
+          type="password"
           placeholder="password"
         />
         <Button variant="warning" type="submit">
