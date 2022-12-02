@@ -26,6 +26,11 @@ export default function MyProfile() {
       if (user) console.log("Profile: ", user);
       const userProfile = await fetchMe();
       setProfile(userProfile);
+      setUsername(userProfile.username);
+      setEmail(userProfile.email);
+      setFirstname(userProfile.firstname);
+      setLastname(userProfile.lastname);
+      setPhoneNumber(userProfile.phoneNumber);
     }
     getMyProfile();
   }, [user]);
@@ -77,6 +82,15 @@ export default function MyProfile() {
                 setFirstname(e.target.value);
               }}
             />
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              value={password}
+              type="text"
+              placeholder="Please Enter a New Password."
+              onChange={(e) => {
+                setFirstname(e.target.value);
+              }}
+            />
             <Form.Label>Lastname</Form.Label>
             <Form.Control
               value={lastname}
@@ -92,12 +106,9 @@ export default function MyProfile() {
               type="text"
               placeholder={user.phoneNumber}
               onChange={(e) => {
-                setPhoneNumber(e.target.value);
+                setPhoneNumber(+e.target.value);
               }}
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
           <Button variant="secondary">Change</Button>
         </Form>
