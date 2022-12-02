@@ -7,6 +7,10 @@ import SingleProduct from "./components/SingleProduct";
 import MyProfile from "./components/MyProfile";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Anime from "./components/Anime";
+import Cartoon from "./components/Cartoon";
+import LiveAction from "./components/LiveAction";
+// import Cart from "./components/Cart";
 
 function App() {
   const { user } = useUsers();
@@ -21,6 +25,10 @@ function App() {
           <Route path="/products/:productId" element={<SingleProduct />} />
           <Route path="/user/register" element={<Register />} />
           <Route path="/user/login" element={<Login />} />
+          <Route path="/Category/Anime" element={<Anime />} />
+          <Route path="/Category/Cartoon" element={<Cartoon />} />
+          <Route path="/Category/LiveAction" element={<LiveAction />} />
+          {/* <Route path="/Cart" element={<Cart />} /> */}
         </Routes>
       </BrowserRouter>
     </div>

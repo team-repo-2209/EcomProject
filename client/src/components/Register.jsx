@@ -58,6 +58,7 @@ export default function Register() {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           placeholder="Enter a password"
+          type="password"
         />
 
         <input

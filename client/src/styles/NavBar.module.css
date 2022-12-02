@@ -1,7 +1,7 @@
 @import url("https://fonts.cdnfonts.com/css/marvel");
 
 .background {
-  background-color: rgb(202, 51, 38);
+  background-color: rgb(170, 45, 33);
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +16,7 @@
 
 .text {
   margin-left: 5vh;
-  margin-top: 7vh;
+  margin-top: 1vh;
   margin-right: 3vh;
   color: rgb(253, 252, 252);
   display: flex;
@@ -33,8 +33,8 @@
   color: white;
   margin-top: 0px;
   text-decoration: none;
-  font-size: xx-large;
-  font-family: Merriweather;
+  font-family: "Marvel", sans-serif;
+  font-size: large;
 }
 
 .header {
@@ -46,6 +46,8 @@
   margin-top: 2vh;
   font-family: "Marvel", sans-serif;
   width: 30vh;
+  margin-right: 2vh;
+  border-radius: 1vh;
 }
 
 .home {
@@ -56,4 +58,9 @@
 .dropdown {
   margin-top: 7vh;
   font-family: "Marvel", sans-serif;
+}
+
+.cart {
+  margin-left: 7vh;
+  margin-right: 20vh;
 }

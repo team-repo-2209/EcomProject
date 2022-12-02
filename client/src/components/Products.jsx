@@ -10,7 +10,7 @@ export default function Products() {
   useEffect(() => {
     async function getProducts() {
       const info = await fetchProducts();
-      console.log("this is info", info);
+
       setProducts(info);
     }
     getProducts();
