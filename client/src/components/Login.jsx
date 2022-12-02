@@ -3,6 +3,7 @@ import { loginUser } from "../api/users";
 import { useNavigate, useParams } from "react-router-dom";
 import useUsers from "../hooks/UseUsers";
 import Button from "react-bootstrap/Button";
+import styles from "../styles/Login.module.css";
 
 export default function Login() {
   const { userFunction } = useParams();
@@ -13,7 +14,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const { setLoggedIn } = useUsers();
   return (
-    <div>
+    <div className={styles.background}>
       <form
         onSubmit={async (event) => {
           event.preventDefault();
@@ -35,22 +36,28 @@ export default function Login() {
         }}
       >
         {error && <h4>{error}</h4>}
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-          placeholder="username"
-        />
-
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="password"
-        />
-        <Button variant="warning" type="submit">
-          Login
-        </Button>
+        <div className={styles.log}>
+          <h2>Please Login</h2>
+          <h4>Username:</h4>
+          <input
+            className={styles.username}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            placeholder="username"
+          />
+          <h4>Password:</h4>
+          <input
+            className={styles.password}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="password"
+          />
+          <div>
+            <Button type="submit">Login</Button>
+          </div>
+        </div>
       </form>
     </div>
   );
