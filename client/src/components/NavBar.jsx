@@ -93,7 +93,7 @@ function NavBar({ user }) {
           </Link>
         </Nav.Item>{" "}
         <Nav.Item>
-          <Link className={styles.text} to="/MyProfile">
+          <Link className={styles.text} to="/myProfile">
             My Profile
           </Link>
         </Nav.Item>
