@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import useUsers from "../hooks/UseUsers";
+import useUsers from "../hooks/useUsers";
 import { fetchMe, updateUser } from "../api/users";
 import WalletCard from "./WalletCard";
 import CreateProduct from "./CreateProduct";
@@ -21,10 +21,11 @@ export default function MyProfile() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [showCreate, setShowCreate] = useState(false);
 
   useEffect(() => {
     async function getMyProfile() {
-      if (user) console.log("Profile: ", user);
+      if (user);
       const userProfile = await fetchMe();
       setProfile(userProfile);
       setUsername(userProfile.username);
@@ -36,13 +37,17 @@ export default function MyProfile() {
     getMyProfile();
   }, [user]);
 
+  function displayCreate() {
+    setShowCreate(true);
+  }
+
   return (
     <div>
       <Card style={{ width: "25rem" }}>
         <Form
           onSubmit={async (e) => {
             e.preventDefault();
-            window.location.reload();
+            console.log("Profile: ", user);
             const result = await updateUser(
               user.id,
               email,
@@ -52,9 +57,10 @@ export default function MyProfile() {
               phoneNumber
             );
             console.log("Updated Profile: ", result);
+            // window.location.reload();
           }}
         >
-          <h3>My Profile</h3>
+          <h3>View & Edit Profile</h3>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -111,12 +117,22 @@ export default function MyProfile() {
               }}
             />
           </Form.Group>
-          <Button variant="secondary">Change</Button>
+          <Button variant="secondary" type="submit">
+            Update
+          </Button>
         </Form>
       </Card>
       <div>
-        <WalletCard />
-        <CreateProduct />
+        {/* <WalletCard /> */}
+        <button onClick={displayCreate}>Create A new Product</button>
+        {showCreate === true ? <CreateProduct /> : null}
+        <button
+          onClick={() => {
+            navigate(`/myProfile/myOrders`);
+          }}
+        >
+          View all My Orders
+        </button>
       </div>
     </div>
   );

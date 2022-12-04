@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { loginUser } from "../api/users";
 import { useNavigate, useParams } from "react-router-dom";
-import useUsers from "../hooks/UseUsers";
+import useUsers from "../hooks/useUsers";
 import Button from "react-bootstrap/Button";
 import styles from "../styles/Login.module.css";
 

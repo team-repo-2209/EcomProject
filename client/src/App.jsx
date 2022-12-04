@@ -1,10 +1,11 @@
 import "./App.css";
-import useUsers from "./hooks/UseUsers";
+import useUsers from "./hooks/useUsers";
 import NavBar from "./components/NavBar";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Products from "./components/Products";
 import SingleProduct from "./components/SingleProduct";
 import MyProfile from "./components/MyProfile";
+import MyOrders from "./components/MyOrders";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Anime from "./components/Anime";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Products />} />
 
           <Route path="/myProfile" element={<MyProfile />} />
+          <Route path="/myProfile/myOrders" element={<MyOrders />} />
           <Route path="/products/:productId" element={<SingleProduct />} />
           <Route path="/user/register" element={<Register />} />
           <Route path="/user/login" element={<Login />} />

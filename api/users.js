@@ -61,6 +61,7 @@ router.patch(
       data: req.body,
     });
     res.send(updateUser);
+    console.log(req.params.userId);
   })
 );
 

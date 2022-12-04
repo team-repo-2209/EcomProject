@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Card from "react-bootstrap/Card";
 
 const WalletCard = () => {
@@ -34,8 +35,14 @@ const WalletCard = () => {
   return (
     <Card>
       <div className="WalletCard">
-        <h4> {"Connect to your crypto wallet"} </h4>
-        <button onClick={connectWalletHandler}>{connButtonText}Connect</button>
+        <h4> {"Connect to your wallet using MetaMask!"} </h4>
+        <button onClick={connectWalletHandler}>Connect</button>
+        <div className="account">
+          <h3>Address: {defaultAccount}</h3>
+        </div>
+        <div className="balanceDisplay">
+          <h3>Balance: {userBalance}</h3>
+        </div>
         {errorMessage}
       </div>
     </Card>
