@@ -6,7 +6,6 @@ const { JWT_SECRET } = process.env;
 const prisma = require("../prisma/prisma");
 const SALT_ROUNDS = 10;
 const { authRequired } = require("./auth");
-const e = require("cors");
 
 router.get(
   "/",

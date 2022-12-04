@@ -57,7 +57,6 @@ export default function MyProfile() {
               phoneNumber
             );
             console.log("Updated Profile: ", result);
-            // window.location.reload();
           }}
         >
           <h3>View & Edit Profile</h3>
