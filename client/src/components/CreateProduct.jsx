@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { createProduct } from "../api/products";
-import useUsers from "../hooks/UseUsers";
+import useUsers from "../hooks/useUsers";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -111,6 +111,9 @@ export default function CreateProduct() {
 
           <Button variant="primary" type="submit">
             Submit
+          </Button>
+          <Button variant="primary" type="cancel">
+            Cancel
           </Button>
         </Form>
       </Card>

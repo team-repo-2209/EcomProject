@@ -6,6 +6,7 @@ export async function fetchMe() {
     },
   });
   const result = await response.json();
+  console.log(result);
   return result;
 }
 
@@ -28,6 +29,7 @@ export async function updateUser(
   lastname,
   phoneNumber
 ) {
+  console.log("update users");
   const response = await fetch(`/api/users/${id}`, {
     method: "PATCH",
     headers: {

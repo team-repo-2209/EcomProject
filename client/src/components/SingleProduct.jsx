@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useAuth from "../hooks/UseUsers";
+import useUsers from "../hooks/useUsers";
 import {
   fetchProductById,
   updateProduct,
