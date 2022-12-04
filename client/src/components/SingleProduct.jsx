@@ -44,19 +44,19 @@ export default function SingleProduct() {
     setShowEdit(true);
   }
 
-  async function handleUpdate() {
-    const result = await updateProduct(
-      singleProduct.id,
-      productName,
-      description,
-      price,
-      isAvailable,
-      imageUrl,
-      categoryId
-    );
-    setShowEdit(false);
-    console.log("Update Result: ", result);
-  }
+  // async function handleUpdate() {
+  //   const result = await updateProduct(
+  //     singleProduct.id,
+  //     productName,
+  //     description,
+  //     price,
+  //     isAvailable,
+  //     imageUrl,
+  //     categoryId
+  //   );
+  //   setShowEdit(false);
+  //   console.log("Update Result: ", result);
+  // }
 
   return (
     <Card>
