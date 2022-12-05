@@ -34,6 +34,12 @@ router.post(
     });
 
     // Create your cart after you create the user. User the newUser.id as the order's userId
+    console.log("newUser:::", newUser);
+    const cart = await prisma.orders.create({
+      data: {
+        userId: newUser.id,
+      },
+    });
 
     delete newUser.password;
 
@@ -69,6 +75,43 @@ router.get(
   authRequired,
   asyncErrorHandler(async (req, res, next) => {
     res.send(req.user);
+  })
+);
+
+router.get(
+  "/me/orders",
+  authRequired,
+  asyncErrorHandler(async (req, res, next) => {
+    const orders = await prisma.orders.findMany({
+      where: {
+        userId: +req.user.id,
+      },
+      include: {
+        order_products: {
+          include: { products: true },
+        },
+      },
+    });
+    res.send(orders);
+  })
+);
+
+router.get(
+  "/me/cart",
+  authRequired,
+  asyncErrorHandler(async (req, res, next) => {
+    const orders = await prisma.orders.findFirst({
+      where: {
+        userId: +req.user.id,
+        isCart: true,
+      },
+      include: {
+        order_products: {
+          include: { products: true },
+        },
+      },
+    });
+    res.send(orders);
   })
 );
 

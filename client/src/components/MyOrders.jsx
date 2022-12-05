@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import useUsers from "../hooks/useUsers";
+
 import {
   fetchAllOrders,
   fetchOrderById,
   fetchProductByOrderId,
 } from "../api/orders";
+
+import { fetchMyOrders } from "../api/users";
 
 export default function MyOrders() {
   const { orderId } = useParams();
@@ -15,32 +18,20 @@ export default function MyOrders() {
 
   useEffect(() => {
     async function getAllOrders() {
-      const items = await fetchAllOrders();
+      const items = await fetchMyOrders();
       setOrders(items);
     }
     getAllOrders();
   }, []);
-
+  console.log("Order:", orders);
   return (
-    <div key={orders.id}>
-      {orders?.map((order) => {
-        if (order.userId === user.id) {
-          return (
-            <div key={order.id}>
-              <h6>ID: {order.userId}</h6>
-
-              {/* {order
-                ? products.map((product) => {
-                    console.log(product.userId);
-
-                    return <h6>ID: {product.productName}</h6>;
-                  })
-                : null} */}
-            </div>
-          );
-        }
+    <div>
+      {orders.map((order) => {
+        return order.order_products.map((op) => {
+          return <h3>{op.products.productName}</h3>;
+        });
       })}
-      <div></div>
+      HELLO!!!!!
     </div>
   );
 }

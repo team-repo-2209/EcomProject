@@ -122,18 +122,18 @@ export default function MyProfile() {
         </Form>
       </Card>
       <div>
-        {user.username !== "admin" ? (
-          <div>
-            <WalletCard />
-            <button
-              onClick={() => {
-                navigate(`/myProfile/myOrders`);
-              }}
-            >
-              View all My Orders
-            </button>
-          </div>
-        ) : null}
+        {/* {user.username !== "admin" ? ( */}
+        <div>
+          <WalletCard />
+          <button
+            onClick={() => {
+              navigate(`/myProfile/myOrders`);
+            }}
+          >
+            View all My Orders
+          </button>
+        </div>
+        {/* ) : null} */}
 
         {user.username === "admin" ? (
           <div>
