@@ -10,6 +10,18 @@ export async function fetchMe() {
   return result;
 }
 
+export async function fetchMyOrders() {
+  const response = await fetch("/api/users/me/orders", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  console.log(result);
+  return result;
+}
+
 export async function logoutUser() {
   const response = await fetch("/api/users/logout", {
     method: "POST",

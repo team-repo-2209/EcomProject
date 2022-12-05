@@ -24,7 +24,7 @@ model Users {
 model Orders {
   id Int @id @default(autoincrement())
   isCompleted Boolean @default(false)
-  isCart Boolean @default(false)
+  isCart Boolean @default(true)
   userId Int
   users Users? @relation(fields: [userId], references: [id])
   order_products Order_Products[]

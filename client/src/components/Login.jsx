@@ -29,6 +29,7 @@ export default function Login() {
             setPassword("");
             setUsername("");
             setLoggedIn(true);
+            // fetch Your Cart
             navigate("/");
           } else {
             setError("Login");
