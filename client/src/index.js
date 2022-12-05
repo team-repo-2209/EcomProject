@@ -9,12 +9,15 @@ import UsersProviders from "./components/UsersProviders";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
+import CartProvider from "./components/CartProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <UsersProviders>
-      <App />
+      <CartProvider>
+        <App />
+      </CartProvider>
     </UsersProviders>
   </React.StrictMode>
 );

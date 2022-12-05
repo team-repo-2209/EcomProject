@@ -1,40 +1,30 @@
-// import styles from "../styles/Cart.module.css";
-// import { fetchOrderById } from "../api/orders";
-// import { useState, useEffect } from "react";
-// import { useNavigate, useParams } from "react-router-dom";
+import styles from "../styles/Cart.module.css";
+import useCart from "../hooks/useCart";
+import { useNavigate, useParams } from "react-router-dom";
+import CartProduct from "./CartProduct";
 
-// export default function Cart() {
-//   const navigate = useNavigate();
-//   const { orderId } = useParams();
-//   const [order, setOrder] = useState({});
+const Cart = () => {
+  const { cart } = useCart();
+  const navigate = useNavigate();
 
-//   useEffect(() => {
-//     async function getOrder() {
-//       const info = await fetchOrderById(orderId);
-//       setOrder(info);
-//     }
-//     getOrder();
-//   }, []);
+  return (
+    <div>
+      <div>
+        <h2>Cart</h2>
+        {cart.products.map((product, i) => (
+          <CartProduct key={`i${i}`} product={product} />
+        ))}
+      </div>
+      <button
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        Continue Shopping
+      </button>
+      <button>Checkout</button>
+    </div>
+  );
+};
 
-//   return (
-//     <div>
-//       <div>
-//         <h2>Cart</h2>
-//       </div>
-//       {order?.map((products) => {
-//         return (
-//           <div key={products.id}>
-//             <h6>{products.productName}</h6>
-//             <h6>${products.price}</h6>
-//           </div>
-//         );
-//       })}
-
-//       <div>
-//         <h2>Cart Total:</h2>
-//       </div>
-//       <button>Continue Shopping</button>
-//       <button>Continue to Checkout</button>
-//     </div>
-//   );
-// }
+export default Cart;

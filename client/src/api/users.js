@@ -22,6 +22,18 @@ export async function fetchMyOrders() {
   return result;
 }
 
+export async function fetchMyCart() {
+  const response = await fetch("/api/users/me/cart", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  console.log(result);
+  return result;
+}
+
 export async function logoutUser() {
   const response = await fetch("/api/users/logout", {
     method: "POST",

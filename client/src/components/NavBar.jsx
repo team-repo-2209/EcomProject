@@ -9,10 +9,14 @@ import home from "../styles/home.png";
 import styles from "../styles/NavBar.module.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import cart from "../styles/cart.png";
+import cartshopper from "../styles/cartshopper.png";
 import { fetchProducts } from "../api/products";
+import useCart from "../hooks/useCart";
+import useUsers from "../hooks/useUsers";
 
-function NavBar({ user }) {
+function NavBar() {
+  const { user } = useUsers();
+  const { cart } = useCart();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
@@ -90,7 +94,7 @@ function NavBar({ user }) {
             </Nav.Item>
             <Nav.Item>
               <Link className={styles.cart} to="/Cart">
-                <img src={cart} height={40} width={40} alt="Logo" />
+                <img src={cartshopper} height={40} width={40} alt="Logo" />
               </Link>
             </Nav.Item>{" "}
           </>
@@ -163,7 +167,7 @@ function NavBar({ user }) {
         </Nav.Item>
         <Nav.Item>
           <Link className={styles.cart} to="/Cart">
-            <img src={cart} height={40} width={40} alt="Logo" />
+            <img src={cartshopper} height={40} width={40} alt="Logo" />
           </Link>
         </Nav.Item>{" "}
       </Navbar>
