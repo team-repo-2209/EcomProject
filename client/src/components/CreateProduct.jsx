@@ -7,14 +7,15 @@ import useUsers from "../hooks/useUsers";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
+import { useEffect } from "react";
 
 export default function CreateProduct() {
   const navigate = useNavigate();
-  const { user } = useUsers();
+  //   const { user } = useUsers();
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [isAvailable, setIsAvailable] = useState(true);
+  const [isAvailable, setIsAvailable] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [categoryId, setCategoryId] = useState("");
 
@@ -22,20 +23,20 @@ export default function CreateProduct() {
     <div>
       <Card>
         <Form
-        //   onSubmit={async (e) => {
-        //     e.preventDefault();
+          onSubmit={async (e) => {
+            e.preventDefault();
 
-        //     const result = await createProduct(
-        //       productName,
-        //       description,
-        //       price,
-        //       isAvailable,
-        //       imageUrl,
-        //       categoryId
-        //     );
-        //     navigate("/");
-        //     console.log("Create Routine Result: ", result);
-        //   }}
+            const result = await createProduct(
+              productName,
+              description,
+              price,
+              isAvailable,
+              imageUrl,
+              categoryId
+            );
+            navigate("/");
+            console.log("Create Routine Result: ", result);
+          }}
         >
           <h3>Create a New Product</h3>
           <Form.Group className="mb-3" controlId="formProductName">
@@ -59,6 +60,8 @@ export default function CreateProduct() {
               onChange={(e) => {
                 setDescription(e.target.value);
               }}
+              as="textarea"
+              rows={5}
             />
           </Form.Group>
 

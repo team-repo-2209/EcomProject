@@ -122,16 +122,25 @@ export default function MyProfile() {
         </Form>
       </Card>
       <div>
-        {/* <WalletCard /> */}
-        <button onClick={displayCreate}>Create A new Product</button>
-        {showCreate === true ? <CreateProduct /> : null}
-        <button
-          onClick={() => {
-            navigate(`/myProfile/myOrders`);
-          }}
-        >
-          View all My Orders
-        </button>
+        {user.username !== "admin" ? (
+          <div>
+            <WalletCard />
+            <button
+              onClick={() => {
+                navigate(`/myProfile/myOrders`);
+              }}
+            >
+              View all My Orders
+            </button>
+          </div>
+        ) : null}
+
+        {user.username === "admin" ? (
+          <div>
+            <button onClick={displayCreate}>Create A new Product</button>
+            {showCreate === true ? <CreateProduct /> : null}
+          </div>
+        ) : null}
       </div>
     </div>
   );
