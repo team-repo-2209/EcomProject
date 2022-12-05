@@ -61,7 +61,7 @@ router.delete(
     const deletedOrderProduct = await prisma.Order_Products.delete({
       where: {
         orderId: +req.params.orderId,
-        productId: +req.params.orderId,
+        productId: +req.params.productId,
       },
     });
     res.send(deletedOrderProduct);

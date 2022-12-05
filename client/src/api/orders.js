@@ -9,3 +9,17 @@ export async function fetchAllOrders() {
   const result = await response.json();
   return result;
 }
+
+export async function updateCart(isCart) {
+  const response = await fetch(`/api/orders`, {
+    method: "PATCH",
+    headers: {
+      "content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      isCart,
+    }),
+  });
+  const result = await response.json();
+  return result;
+}

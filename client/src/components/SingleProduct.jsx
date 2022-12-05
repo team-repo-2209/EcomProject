@@ -8,6 +8,7 @@ import {
 } from "../api/products";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
+import useCart from "../hooks/useCart";
 
 export default function SingleProduct() {
   const { productId } = useParams();
@@ -20,6 +21,7 @@ export default function SingleProduct() {
   const [categoryId, setCategoryId] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [showEdit, setShowEdit] = useState(false);
+  const { addProduct, cart } = useCart();
 
   useEffect(() => {
     async function getProductById() {
@@ -63,7 +65,9 @@ export default function SingleProduct() {
             >
               Back
             </button>
-            <button>Add to Cart</button>
+            <button onClick={() => addProduct(singleProduct)}>
+              Add to Cart
+            </button>
 
             <button onClick={() => handleDelete(singleProduct.id)}>
               Delete

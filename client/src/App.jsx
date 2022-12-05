@@ -1,5 +1,5 @@
 import "./App.css";
-import useUsers from "./hooks/useUsers";
+
 import NavBar from "./components/NavBar";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Products from "./components/Products";
@@ -11,14 +11,13 @@ import Login from "./components/Login";
 import Anime from "./components/Anime";
 import Cartoon from "./components/Cartoon";
 import LiveAction from "./components/LiveAction";
-// import Cart from "./components/Cart";
+import Cart from "./components/Cart";
 
 function App() {
-  const { user } = useUsers();
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar user={user} />
+        <NavBar />
         <Routes>
           <Route path="/" element={<Products />} />
 
@@ -30,7 +29,7 @@ function App() {
           <Route path="/Category/Anime" element={<Anime />} />
           <Route path="/Category/Cartoon" element={<Cartoon />} />
           <Route path="/Category/LiveAction" element={<LiveAction />} />
-          {/* <Route path="/Cart" element={<Cart />} /> */}
+          <Route path="/Cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </div>
