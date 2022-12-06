@@ -135,12 +135,12 @@ export default function MyProfile() {
         </div>
         {/* ) : null} */}
 
-        {user.username === "admin" ? (
-          <div>
-            <button onClick={displayCreate}>Create A new Product</button>
-            {showCreate === true ? <CreateProduct /> : null}
-          </div>
-        ) : null}
+        {/* {user.username === "admin" ? ( */}
+        <div>
+          <button onClick={displayCreate}>Create A new Product</button>
+          {showCreate === true ? <CreateProduct /> : null}
+        </div>
+        {/* ) : null} */}
       </div>
     </div>
   );
