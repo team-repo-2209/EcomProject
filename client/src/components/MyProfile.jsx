@@ -43,6 +43,12 @@ export default function MyProfile() {
 
   return (
     <div>
+      {user.username === "admin" ? (
+        <div>
+          <button onClick={displayCreate}>Create A new Product</button>
+          {showCreate === true ? <CreateProduct /> : null}
+        </div>
+      ) : null}
       <Card style={{ width: "25rem" }}>
         <Form
           onSubmit={async (e) => {
@@ -122,25 +128,18 @@ export default function MyProfile() {
         </Form>
       </Card>
       <div>
-        {/* {user.username !== "admin" ? ( */}
-        <div>
-          <WalletCard />
-          <button
-            onClick={() => {
-              navigate(`/myProfile/myOrders`);
-            }}
-          >
-            View all My Orders
-          </button>
-        </div>
-        {/* ) : null} */}
-
-        {/* {user.username === "admin" ? ( */}
-        <div>
-          <button onClick={displayCreate}>Create A new Product</button>
-          {showCreate === true ? <CreateProduct /> : null}
-        </div>
-        {/* ) : null} */}
+        {user.username !== "admin" ? (
+          <div>
+            <WalletCard />
+            <button
+              onClick={() => {
+                navigate(`/myProfile/myOrders`);
+              }}
+            >
+              View all My Orders
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

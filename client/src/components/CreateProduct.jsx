@@ -2,16 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { createProduct } from "../api/products";
-import useUsers from "../hooks/useUsers";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
-import { useEffect } from "react";
 
 export default function CreateProduct() {
   const navigate = useNavigate();
-  //   const { user } = useUsers();
+
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
