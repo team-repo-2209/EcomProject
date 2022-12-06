@@ -25,17 +25,20 @@ export default function CreateProduct() {
         <Form
           onSubmit={async (e) => {
             e.preventDefault();
-
-            const result = await createProduct(
-              productName,
-              description,
-              price,
-              isAvailable,
-              imageUrl,
-              categoryId
-            );
-            navigate("/");
-            console.log("Create Routine Result: ", result);
+            try {
+              const result = await createProduct(
+                productName,
+                description,
+                price,
+                isAvailable,
+                imageUrl,
+                categoryId
+              );
+              navigate("/");
+              console.log("Create Routine Result: ", result);
+            } catch (error) {
+              console.log(error);
+            }
           }}
         >
           <h3>Create a New Product</h3>
@@ -107,7 +110,7 @@ export default function CreateProduct() {
               type="text"
               placeholder="Enter a Category ID"
               onChange={(e) => {
-                setCategoryId(e.target.value);
+                setCategoryId(+e.target.value);
               }}
             />
           </Form.Group>
