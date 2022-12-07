@@ -76,8 +76,7 @@ export default function SingleProduct() {
             {user.username !== "admin" ? (
               <button
                 onClick={() => {
-                  addProduct(singleProduct);
-                  navigate(`/Cart`);
+                  addProduct(cart.id, singleProduct.id);
                 }}
               >
                 Add to Cart

@@ -7,9 +7,8 @@ const useCart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   const addProduct = useCallback(
-    async (product) => {
-      console.log("cart:", cart, "product:", product);
-      const result = await addToCart(cart.id, product.id);
+    async (cartId, productId) => {
+      const result = await addToCart(cartId, productId);
       if (result.name === "error") {
         console.log("Already in Your Cart!");
       } else {
