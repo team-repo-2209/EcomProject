@@ -12,6 +12,7 @@ import Anime from "./components/Anime";
 import Cartoon from "./components/Cartoon";
 import LiveAction from "./components/LiveAction";
 import Cart from "./components/Cart";
+import AdminPage from "./components/AdminPage";
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
           <Route path="/Category/Anime" element={<Anime />} />
           <Route path="/Category/Cartoon" element={<Cartoon />} />
           <Route path="/Category/LiveAction" element={<LiveAction />} />
-          <Route path="/Cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </div>
