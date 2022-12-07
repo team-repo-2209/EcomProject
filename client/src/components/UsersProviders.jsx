@@ -5,12 +5,11 @@ import UsersContext from "../context/usersConext";
 export default function UsersProviders({ children }) {
   const [user, setUser] = useState({ user: "Guest" });
   const [loggedIn, setLoggedIn] = useState(false);
-  
+
   useEffect(() => {
     async function getMe() {
       const user = await fetchMe();
 
-      setUser(user);
       if (user.loggedIn === false) {
         setUser({ user: "Guest" });
         setLoggedIn(false);

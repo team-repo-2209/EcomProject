@@ -181,8 +181,8 @@ function NavBar() {
           <Link
             className={styles.text}
             onClick={async () => {
-              localStorage.removeItem("user");
               await logoutUser();
+              setLoggedIn(false);
               navigate("/user/login");
             }}
           >
