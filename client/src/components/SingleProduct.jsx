@@ -73,41 +73,11 @@ export default function SingleProduct() {
             >
               Back
             </button>
-
-            <button
-              onClick={async () => {
-                await addProduct(singleProduct);
-                navigate("/Cart");
-              }}
-            >
-              Add to Cart
-            </button>
-
-            <button onClick={async () => await handleDelete(singleProduct.id)}>
-              Delete
-            </button>
-            <button onClick={displayEdit}>Edit</button>
-            {showEdit === true ? (
-              <Form
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  window.location.reload();
-                  const result = await updateProduct(
-                    singleProduct.id,
-                    productName,
-                    description,
-                    price,
-                    isAvailable,
-                    imageUrl,
-                    categoryId
-                  );
-
             {user.username !== "admin" ? (
               <button
                 onClick={() => {
                   addProduct(singleProduct);
                   navigate(`/Cart`);
-
                 }}
               >
                 Add to Cart
@@ -116,7 +86,6 @@ export default function SingleProduct() {
             {user.username === "admin" ? (
               <>
                 <button onClick={displayEdit}>Edit</button>
-
                 {showEdit === true ? (
                   <Form
                     onSubmit={async (e) => {
@@ -192,7 +161,6 @@ export default function SingleProduct() {
                     </div>
                   </Form>
                 ) : null}
-
                 <button onClick={() => handleDelete(singleProduct.id)}>
                   Delete
                 </button>
