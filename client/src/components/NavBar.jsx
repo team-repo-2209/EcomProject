@@ -13,9 +13,10 @@ import cartshopper from "../styles/cartshopper.png";
 import { fetchProducts } from "../api/products";
 import useCart from "../hooks/useCart";
 import useUsers from "../hooks/useUsers";
+import { fetchMe } from "../api/users";
 
 function NavBar() {
-  const { user } = useUsers();
+  const { user, setUser, setLoggedIn } = useUsers();
   const { cart } = useCart();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +29,21 @@ function NavBar() {
       setProducts(info);
     }
     getProducts();
+  }, []);
+
+  useEffect(() => {
+    async function getMe() {
+      const user = await fetchMe();
+
+      if (user.loggedIn === false) {
+        setUser({ user: "Guest" });
+        setLoggedIn(false);
+      } else {
+        setUser(user);
+        setLoggedIn(true);
+      }
+    }
+    getMe();
   }, []);
 
   function productMatches(product, text) {

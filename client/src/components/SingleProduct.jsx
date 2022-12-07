@@ -9,6 +9,7 @@ import {
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import useCart from "../hooks/useCart";
+import eth from "../styles/eth.png";
 
 export default function SingleProduct() {
   const { user } = useUsers();
@@ -23,6 +24,8 @@ export default function SingleProduct() {
   const [imageUrl, setImageUrl] = useState("");
   const [showEdit, setShowEdit] = useState(false);
   const { addProduct, cart } = useCart();
+
+  console.log("CART IN SING PROD", cart);
 
   useEffect(() => {
     async function getProductById() {
@@ -55,7 +58,11 @@ export default function SingleProduct() {
             <img src={singleProduct.imageUrl} alt="Product" />
             <h6>{singleProduct.productName}</h6>
             <h6>{singleProduct.description}</h6>
-            <h6>${singleProduct.price}</h6>
+            <h6>
+              <img src={eth} height={15} width={15} alt="Eth" />
+              .0
+              {singleProduct.price}
+            </h6>
             <h6>
               In Stock?: {singleProduct.isAvailable === true ? "Yes" : "No"}
             </h6>
@@ -66,11 +73,41 @@ export default function SingleProduct() {
             >
               Back
             </button>
+
+            <button
+              onClick={async () => {
+                await addProduct(singleProduct);
+                navigate("/Cart");
+              }}
+            >
+              Add to Cart
+            </button>
+
+            <button onClick={async () => await handleDelete(singleProduct.id)}>
+              Delete
+            </button>
+            <button onClick={displayEdit}>Edit</button>
+            {showEdit === true ? (
+              <Form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  window.location.reload();
+                  const result = await updateProduct(
+                    singleProduct.id,
+                    productName,
+                    description,
+                    price,
+                    isAvailable,
+                    imageUrl,
+                    categoryId
+                  );
+
             {user.username !== "admin" ? (
               <button
                 onClick={() => {
                   addProduct(singleProduct);
                   navigate(`/Cart`);
+
                 }}
               >
                 Add to Cart
