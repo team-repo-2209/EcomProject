@@ -28,10 +28,16 @@ export default function MyOrders() {
     <div>
       {orders.map((order) => {
         return order.order_products.map((op) => {
-          return <h3>{op.products.productName}</h3>;
+          return (
+            <div key={op.products.id}>
+              <img src={op.products.imageUrl} alt="Product" />
+              <h3>{op.products.productName}</h3>
+              <h6>{op.products.description}</h6>
+              <h6>Price: {op.products.price}</h6>
+            </div>
+          );
         });
       })}
-      HELLO!!!!!
     </div>
   );
 }

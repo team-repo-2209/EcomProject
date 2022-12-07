@@ -12,6 +12,7 @@ import useCart from "../hooks/useCart";
 import eth from "../styles/eth.png";
 
 export default function SingleProduct() {
+  const { user } = useUsers();
   const { productId } = useParams();
   const navigate = useNavigate();
   const [singleProduct, setSingleProduct] = useState({});
@@ -72,6 +73,7 @@ export default function SingleProduct() {
             >
               Back
             </button>
+
             <button
               onClick={async () => {
                 await addProduct(singleProduct);
@@ -99,66 +101,102 @@ export default function SingleProduct() {
                     imageUrl,
                     categoryId
                   );
+
+            {user.username !== "admin" ? (
+              <button
+                onClick={() => {
+                  addProduct(singleProduct);
+                  navigate(`/Cart`);
+
                 }}
               >
-                <div>
-                  <label>Product Name</label>
-                  <input
-                    value={productName}
-                    type="text"
-                    placeholder={singleProduct.productName}
-                    onChange={(e) => {
-                      setProductName(e.target.value);
+                Add to Cart
+              </button>
+            ) : null}
+            {user.username === "admin" ? (
+              <>
+                <button onClick={displayEdit}>Edit</button>
+
+                {showEdit === true ? (
+                  <Form
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      window.location.reload();
+                      const result = await updateProduct(
+                        singleProduct.id,
+                        productName,
+                        description,
+                        price,
+                        isAvailable,
+                        imageUrl,
+                        categoryId
+                      );
                     }}
-                  />
-                  <label>Description</label>
-                  <input
-                    value={description}
-                    type="text"
-                    placeholder={singleProduct.description}
-                    onChange={(e) => {
-                      setDescription(e.target.value);
-                    }}
-                  />
-                  <label>Price</label>
-                  <input
-                    value={price}
-                    type="text"
-                    placeholder={singleProduct.price}
-                    onChange={(e) => {
-                      setPrice(+e.target.value);
-                    }}
-                  />
-                  <label>Is the product in stock?</label>
-                  <input
-                    value={isAvailable}
-                    type="checkbox"
-                    onChange={(e) => {
-                      setIsAvailable(!isAvailable);
-                    }}
-                  />
-                  <label>Category Id</label>
-                  <input
-                    value={categoryId}
-                    type="text"
-                    placeholder={singleProduct.categoryId}
-                    onChange={(e) => {
-                      setCategoryId(e.target.value);
-                    }}
-                  />
-                  <label>Image URL</label>
-                  <input
-                    value={categoryId}
-                    type="text"
-                    placeholder={singleProduct.imageUrl}
-                    onChange={(e) => {
-                      setImageUrl(e.target.value);
-                    }}
-                  />
-                  <button type="submit">Update</button>
-                  <button>Cancel</button>
-                </div>
-              </Form>
+                  >
+                    <div>
+                      <label>Product Name</label>
+                      <input
+                        value={productName}
+                        type="text"
+                        placeholder={singleProduct.productName}
+                        onChange={(e) => {
+                          setProductName(e.target.value);
+                        }}
+                      />
+                      <label>Description</label>
+                      <input
+                        value={description}
+                        type="text"
+                        placeholder={singleProduct.description}
+                        onChange={(e) => {
+                          setDescription(e.target.value);
+                        }}
+                      />
+                      <label>Price</label>
+                      <input
+                        value={price}
+                        type="text"
+                        placeholder={singleProduct.price}
+                        onChange={(e) => {
+                          setPrice(+e.target.value);
+                        }}
+                      />
+                      <label>Is the product in stock?</label>
+                      <input
+                        value={isAvailable}
+                        type="checkbox"
+                        onChange={(e) => {
+                          setIsAvailable(!isAvailable);
+                        }}
+                      />
+                      <label>Category Id</label>
+                      <input
+                        value={categoryId}
+                        type="text"
+                        placeholder={singleProduct.categoryId}
+                        onChange={(e) => {
+                          setCategoryId(e.target.value);
+                        }}
+                      />
+                      <label>Image URL</label>
+                      <input
+                        value={categoryId}
+                        type="text"
+                        placeholder={singleProduct.imageUrl}
+                        onChange={(e) => {
+                          setImageUrl(e.target.value);
+                        }}
+                      />
+                      <button type="submit">Update</button>
+                      <button>Cancel</button>
+                    </div>
+                  </Form>
+                ) : null}
+
+                <button onClick={() => handleDelete(singleProduct.id)}>
+                  Delete
+                </button>
+              </>
             ) : null}
           </div>
         )}

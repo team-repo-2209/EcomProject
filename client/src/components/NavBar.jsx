@@ -164,11 +164,19 @@ function NavBar() {
             </DropdownButton>
           </div>
         </Nav.Item>
-        <Nav.Item>
-          <Link className={styles.text} to="/myProfile">
-            My Profile
-          </Link>
-        </Nav.Item>
+        {user.username !== "admin" ? (
+          <Nav.Item>
+            <Link className={styles.text} to="/myProfile">
+              My Profile
+            </Link>
+          </Nav.Item>
+        ) : (
+          <Nav.Item>
+            <Link className={styles.text} to="/admin">
+              Admin
+            </Link>
+          </Nav.Item>
+        )}
         <Nav.Item>
           <Link
             className={styles.text}
@@ -182,7 +190,7 @@ function NavBar() {
           </Link>
         </Nav.Item>
         <Nav.Item>
-          <Link className={styles.cart} to="/Cart">
+          <Link className={styles.cart} to="/cart">
             <img src={cartshopper} height={40} width={40} alt="Logo" />
           </Link>
         </Nav.Item>{" "}
