@@ -23,7 +23,9 @@ export default function SingleProduct() {
   const [categoryId, setCategoryId] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [showEdit, setShowEdit] = useState(false);
-  const { addProduct, cart } = useCart();
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const { addProduct, cart, setCart } = useCart();
 
   console.log("CART IN SING PROD", cart);
 
@@ -38,6 +40,7 @@ export default function SingleProduct() {
       setCategoryId(product.categoryId);
       setImageUrl(product.imageUrl);
     }
+
     getProductById();
   }, []);
   console.log(singleProduct);
@@ -73,15 +76,27 @@ export default function SingleProduct() {
             >
               Back
             </button>
+
             {user.username !== "admin" ? (
-              <button
-                onClick={() => {
-                  addProduct(cart.id, singleProduct.id);
-                }}
-              >
-                Add to Cart
-              </button>
+              <>
+                {cart.order_products.filter((op) => {
+                  console.log({ op, singleProduct });
+                  return op.productId === singleProduct.id;
+                }).length ? (
+                  <h4>Already in Cart!</h4>
+                ) : (
+                  <button
+                    onClick={async () => {
+                      await addProduct(cart.id, singleProduct.id);
+                      navigate(`/cart`);
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                )}
+              </>
             ) : null}
+
             {user.username === "admin" ? (
               <>
                 <button onClick={displayEdit}>Edit</button>
