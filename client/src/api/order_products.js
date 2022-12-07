@@ -1,5 +1,5 @@
-export async function removeItemFromCart(orderId, productId) {
-  const response = await fetch(`/api/order_products/${orderId}/${productId}`, {
+export async function removeItemFromCart(opId) {
+  const response = await fetch(`/api/order_products/${opId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

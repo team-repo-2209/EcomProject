@@ -1,6 +1,7 @@
 import { useCallback, useContext } from "react";
 import CartContext from "../context/cartContext";
 import { removeItemFromCart, addToCart } from "../api/order_products";
+import { fetchMyCart } from "../api/users";
 
 const useCart = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -12,8 +13,8 @@ const useCart = () => {
       if (result.name === "error") {
         console.log("Already in Your Cart!");
       } else {
-        const newProduct = [...cart.products, product];
-        setCart({ ...cart, products: newProduct });
+        const updatedCart = await fetchMyCart();
+        setCart(updatedCart);
       }
     },
     [cart, setCart]
@@ -21,11 +22,10 @@ const useCart = () => {
 
   const removeProduct = useCallback(
     async (newProduct) => {
-      await removeItemFromCart(cart.id, newProduct.id);
-      const filteredProducts = cart.products.filter((product) => {
-        return product.id !== newProduct.id;
-      });
-      setCart({ ...cart, products: filteredProducts });
+      await removeItemFromCart(newProduct.id);
+      const updatedCart = await fetchMyCart();
+      console.log("Updated Cart: ", updatedCart);
+      setCart(updatedCart);
     },
     [cart, setCart]
   );

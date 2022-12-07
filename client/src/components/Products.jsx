@@ -2,6 +2,7 @@ import { fetchProducts } from "../api/products";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Products.module.css";
+import eth from "../styles/eth.png";
 
 export default function Products() {
   const navigate = useNavigate();
@@ -23,8 +24,13 @@ export default function Products() {
           <div className={styles.box} key={product.id}>
             <img className={styles.img} src={product.imageUrl} />
             <h6>{product.productName}</h6>
-            <h6>${product.price}</h6>
-
+            <div>
+              <h6>
+                <img src={eth} height={15} width={15} alt="Eth" />
+                .0
+                {product.price}
+              </h6>
+            </div>
             <button
               className={styles.button}
               onClick={() => {

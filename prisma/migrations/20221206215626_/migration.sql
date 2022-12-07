@@ -1,15 +1,12 @@
--- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('OPEN', 'PENDING', 'RECEIVED', 'COMPLETED', 'CANCELLED');
-
 -- CreateTable
 CREATE TABLE "Users" (
     "id" SERIAL NOT NULL,
-    "email" TEXT NOT NULL,
+    "email" TEXT,
     "password" VARCHAR(255) NOT NULL,
     "username" TEXT NOT NULL,
-    "firstname" VARCHAR(255) NOT NULL,
-    "lastname" VARCHAR(255) NOT NULL,
-    "phoneNumber" VARCHAR(20) NOT NULL,
+    "firstname" VARCHAR(255),
+    "lastname" VARCHAR(255),
+    "phoneNumber" VARCHAR(20),
 
     CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
 );
@@ -17,12 +14,19 @@ CREATE TABLE "Users" (
 -- CreateTable
 CREATE TABLE "Orders" (
     "id" SERIAL NOT NULL,
-    "orderNumber" INTEGER,
-    "orderStatus" "OrderStatus" NOT NULL DEFAULT 'OPEN',
-    "isCart" BOOLEAN DEFAULT false,
+    "isCart" BOOLEAN NOT NULL DEFAULT true,
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "Orders_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Categories" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+
+    CONSTRAINT "Categories_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -45,16 +49,6 @@ CREATE TABLE "Order_Products" (
     "orderId" INTEGER NOT NULL,
 
     CONSTRAINT "Order_Products_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Categories" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-    "imageUrl" TEXT NOT NULL,
-
-    CONSTRAINT "Categories_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

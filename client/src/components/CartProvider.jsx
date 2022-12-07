@@ -2,18 +2,22 @@
 import { useState, useEffect } from "react";
 import { fetchMyCart } from "../api/users";
 import CartContext from "../context/cartContext";
+import useUsers from "../hooks/useUsers";
 
 export default function CartProvider({ children }) {
-  const [cart, setCart] = useState(true);
-
+  const { user, loggedIn } = useUsers();
+  const [cart, setCart] = useState({});
+  console.log("USER IS CURRENTLY: ", user);
   useEffect(() => {
     async function getCart() {
-      const cart = await fetchMyCart();
-      console.log(cart);
-      setCart(cart);
+      if (user.user !== "Guest") {
+        const cart = await fetchMyCart();
+        console.log(cart);
+        setCart(cart);
+      }
     }
     getCart();
-  }, []);
+  }, [loggedIn]);
   return (
     <CartContext.Provider value={{ cart, setCart }}>
       {children}

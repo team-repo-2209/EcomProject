@@ -38,7 +38,6 @@ const users = [
 
 const orders = [
   {
-    isCompleted: false,
     isCart: false,
     userId: 1,
   },
@@ -63,7 +62,7 @@ const products = [
   {
     productName: "Anime Spider-man NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 2,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673370/Anime%20/6-60192_venom-poster-digital-art-miles-morales-spider-man_quskat.jpg",
@@ -72,7 +71,7 @@ const products = [
   {
     productName: "Anime Black Widow NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 5,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673312/Anime%20/802c6abbdfb5e8d4541a4161a24cf71a_pzd0zz.jpg",
@@ -81,7 +80,7 @@ const products = [
   {
     productName: "Anime Thor NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 3,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673244/Anime%20/HD-wallpaper-thor-anime-god-of-thunder-infinity-war-new-anime-the-avengers_pjftiv.jpg",
@@ -90,7 +89,7 @@ const products = [
   {
     productName: "Anime Doctor Strange NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 9,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673154/Anime%20/doctor-strange-fairy-tail_ozjwzb.webp",
@@ -99,7 +98,7 @@ const products = [
   {
     productName: "Anime Iron Man NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 2,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673011/Anime%20/i-am-iron-man_1_crbocf.webp",
@@ -108,7 +107,7 @@ const products = [
   {
     productName: "Cartoon Spider-man NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 9,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673877/Cartoon/70535eefd00556de72bb3baa1341e274_niirlk.jpg",
@@ -117,7 +116,7 @@ const products = [
   {
     productName: "Cartoon Black Widow NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 8,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673801/Cartoon/cda9da5a35e39cb13496cd52267c9d06_lvhag3.jpg",
@@ -126,7 +125,7 @@ const products = [
   {
     productName: "Cartoon Thor NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 1,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673732/Cartoon/drawn-cartoon-Thor-with-a-hammer_bj9nv3.jpg",
@@ -135,7 +134,7 @@ const products = [
   {
     productName: "Cartoon Doctor Strange NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 2,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673685/Cartoon/e2e186827b58c1ed97961629d6d92ce2_zf7ouu.jpg",
@@ -144,7 +143,7 @@ const products = [
   {
     productName: "Cartoon Iron Man NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 1,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673627/Cartoon/11189bce30bcb47fcf1e9dba3e78ca27_xkdivq.jpg",
@@ -153,7 +152,7 @@ const products = [
   {
     productName: "Live Action Spider-man NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 8,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669674058/Live%20Action/AMC_Scene_PromoPost_Spidey-IMAX_s6vfgv.jpg",
@@ -162,7 +161,7 @@ const products = [
   {
     productName: "Live Action Black Widow NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 3,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669674113/Live%20Action/black-widow-16_he1dnt.jpg",
@@ -171,7 +170,7 @@ const products = [
   {
     productName: "Live Action Thor NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 2,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669674183/Live%20Action/Thor-Ragnarok-Review_ezckif.webp",
@@ -180,7 +179,7 @@ const products = [
   {
     productName: "Live Action Doctor Strange NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 1,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669674295/Live%20Action/wp7855728_uw5cwb.jpg",
@@ -189,7 +188,7 @@ const products = [
   {
     productName: "Live Action Iron Man NFT",
     description: "A rare NFT!",
-    price: 500,
+    price: 7,
     isAvailable: true,
     imageUrl:
       "https://res.cloudinary.com/dk7bvkdnm/image/upload/v1669673995/Live%20Action/iron-Man_ooc3pf.webp",

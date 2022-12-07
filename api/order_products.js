@@ -55,13 +55,12 @@ router.patch(
 );
 
 router.delete(
-  "/:orderId/:productId",
+  "/:opId",
   authRequired,
   asyncErrorHandler(async (req, res, next) => {
     const deletedOrderProduct = await prisma.Order_Products.delete({
       where: {
-        orderId: +req.params.orderId,
-        productId: +req.params.productId,
+        id: +req.params.opId,
       },
     });
     res.send(deletedOrderProduct);
