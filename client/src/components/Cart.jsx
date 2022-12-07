@@ -51,7 +51,7 @@ export default function Cart() {
           <img src={eth} height={25} width={25} alt="Eth" />
           {calculateTotal(cart)}.00
         </h3>
-        <button>Checkout</button>
+        <button onClick={() => navigate("/Checkout")}>Checkout</button>
         <button onClick={() => navigate("/")}>Continue Shopping</button>
       </div>
     </div>

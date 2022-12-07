@@ -13,6 +13,7 @@ import Cartoon from "./components/Cartoon";
 import LiveAction from "./components/LiveAction";
 import Cart from "./components/Cart";
 import AdminPage from "./components/AdminPage";
+import CryptoPayment from "./components/CryptoPayment";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/Category/LiveAction" element={<LiveAction />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/Checkout" element={<CryptoPayment />} />
         </Routes>
       </BrowserRouter>
     </div>
