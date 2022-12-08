@@ -5,8 +5,7 @@ import useUsers from "../hooks/useUsers";
 import { fetchAllUsers } from "../api/users";
 import CreateProduct from "./CreateProduct";
 
-import styles from "../styles/Register.module.css";
-import Card from "react-bootstrap/Card";
+import styles from "../styles/Profile.module.css";
 
 export default function AdminPage() {
   const { user } = useUsers();
@@ -29,6 +28,22 @@ export default function AdminPage() {
   }
 
   return (
+
+    <div className={styles.log}>
+      <h1>Profiles</h1>
+      {profiles?.map((profile) => {
+        return (
+          <div key={profile.id} className={styles.card}>
+            <h6>
+              Name: {profile.firstname} {profile.lastname}
+            </h6>
+            <h6>Username: {profile.username}</h6>
+            <h6>Email Address: {profile.email}</h6>
+            <h6>Phone Number: {profile.phoneNumber}</h6>
+          </div>
+        );
+      })}
+
     <div>
       <div>
         <button onClick={displayCreate}>Create A new Product</button>

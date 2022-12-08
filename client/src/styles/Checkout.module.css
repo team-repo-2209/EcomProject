@@ -1,0 +1,16 @@
+@import url("https://fonts.cdnfonts.com/css/marvel");
+
+.box {
+  font-family: "Marvel", sans-serif;
+  color: white;
+  justify-content: center;
+  border-radius: 2vh;
+  margin-top: 60px;
+  height: 50vh;
+  width: 80vh;
+  border: 0.5vh solid rgb(202, 129, 123);
+  background-image: linear-gradient(rgb(158, 33, 22), rgb(100, 25, 18));
+  border-style: outset;
+  box-shadow: 5px 10px rgb(8, 0, 0);
+  margin-left: 60vh;
+}

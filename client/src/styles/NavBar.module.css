@@ -3,30 +3,28 @@
 .background {
   background-color: rgb(170, 45, 33);
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 10vh;
-  display: flex;
-  justify-content: space-between;
-  align-content: flex-start;
-  min-height: 120px;
+  top: 0px;
+  width: 100%;
+
+  height: 8vh;
   border-bottom: 2px solid black;
 }
 
 .text {
   margin-left: 5vh;
   margin-top: 1vh;
-  margin-right: 3vh;
   color: rgb(253, 252, 252);
-  display: flex;
-  align-items: flex-end;
   font-family: "Marvel", sans-serif;
   font-size: larger;
+  text-decoration: none;
+  display: block;
 }
 
 .text:hover {
   color: rgb(17, 40, 104);
+  text-decoration: underline;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .welcome {
@@ -37,30 +35,22 @@
   font-size: large;
 }
 
-.header {
-  margin-left: 15px;
-}
-
-.searchbar {
-  margin-left: 3vh;
+.dropdown {
   margin-top: 2vh;
   font-family: "Marvel", sans-serif;
-  width: 30vh;
-  margin-right: 2vh;
-  border-radius: 1vh;
-}
-
-.home {
-  margin-right: 20vh;
-  margin-top: 5vh;
-}
-
-.dropdown {
-  margin-top: 7vh;
-  font-family: "Marvel", sans-serif;
+  display: block;
+  overflow: visible;
+  display: flex;
+  align-items: flex-end;
+  margin-left: 145vh;
 }
 
 .cart {
-  margin-left: 7vh;
-  margin-right: 20vh;
+  margin-left: 5vh;
+  cursor: pointer;
+}
+
+.img {
+  margin-left: 2vh;
+  align-items: flex-start;
 }
