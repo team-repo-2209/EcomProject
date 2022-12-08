@@ -24,7 +24,9 @@ export default function SingleProduct() {
   const [categoryId, setCategoryId] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [showEdit, setShowEdit] = useState(false);
-  const { addProduct, cart } = useCart();
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const { addProduct, cart, setCart } = useCart();
 
   console.log("CART IN SING PROD", cart);
 
@@ -39,6 +41,7 @@ export default function SingleProduct() {
       setCategoryId(product.categoryId);
       setImageUrl(product.imageUrl);
     }
+
     getProductById();
   }, []);
   console.log(singleProduct);
@@ -79,6 +82,7 @@ export default function SingleProduct() {
               }}
             >
               Back
+
             </Button>
           </div>
           {user.username !== "admin" ? (
@@ -185,5 +189,116 @@ export default function SingleProduct() {
         </div>
       )}
     </div>
+
+            </button>
+
+            {user.username !== "admin" ? (
+              <>
+                {cart.order_products.filter((op) => {
+                  console.log({ op, singleProduct });
+                  return op.productId === singleProduct.id;
+                }).length ? (
+                  <h4>Already in Cart!</h4>
+                ) : (
+                  <button
+                    onClick={async () => {
+                      await addProduct(cart.id, singleProduct.id);
+                      navigate(`/cart`);
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                )}
+              </>
+            ) : null}
+
+            {user.username === "admin" ? (
+              <>
+                <button onClick={displayEdit}>Edit</button>
+                {showEdit === true ? (
+                  <Form
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      window.location.reload();
+                      const result = await updateProduct(
+                        singleProduct.id,
+                        productName,
+                        description,
+                        price,
+                        isAvailable,
+                        imageUrl,
+                        categoryId
+                      );
+                    }}
+                  >
+                    <div>
+                      <label>Product Name</label>
+                      <input
+                        value={productName}
+                        type="text"
+                        placeholder={singleProduct.productName}
+                        onChange={(e) => {
+                          setProductName(e.target.value);
+                        }}
+                      />
+                      <label>Description</label>
+                      <input
+                        value={description}
+                        type="text"
+                        placeholder={singleProduct.description}
+                        onChange={(e) => {
+                          setDescription(e.target.value);
+                        }}
+                      />
+                      <label>Price</label>
+                      <input
+                        value={price}
+                        type="text"
+                        placeholder={singleProduct.price}
+                        onChange={(e) => {
+                          setPrice(+e.target.value);
+                        }}
+                      />
+                      <label>Is the product in stock?</label>
+                      <input
+                        value={isAvailable}
+                        type="checkbox"
+                        onChange={(e) => {
+                          setIsAvailable(!isAvailable);
+                        }}
+                      />
+                      <label>Category Id</label>
+                      <input
+                        value={categoryId}
+                        type="text"
+                        placeholder={singleProduct.categoryId}
+                        onChange={(e) => {
+                          setCategoryId(e.target.value);
+                        }}
+                      />
+                      <label>Image URL</label>
+                      <input
+                        value={categoryId}
+                        type="text"
+                        placeholder={singleProduct.imageUrl}
+                        onChange={(e) => {
+                          setImageUrl(e.target.value);
+                        }}
+                      />
+                      <button type="submit">Update</button>
+                      <button>Cancel</button>
+                    </div>
+                  </Form>
+                ) : null}
+                <button onClick={() => handleDelete(singleProduct.id)}>
+                  Delete
+                </button>
+              </>
+            ) : null}
+          </div>
+        )}
+      </div>
+    </Card>
+
   );
 }

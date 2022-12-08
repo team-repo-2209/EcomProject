@@ -10,7 +10,6 @@ export default function UsersProviders({ children }) {
     async function getMe() {
       const user = await fetchMe();
 
-      setUser(user);
       if (user.loggedIn === false) {
         setUser({ user: "Guest" });
         setLoggedIn(false);
