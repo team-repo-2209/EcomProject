@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Button from "react-bootstrap/esm/Button";
 import useUsers from "../hooks/useUsers";
 import { fetchAllUsers } from "../api/users";
 import CreateProduct from "./CreateProduct";
@@ -28,7 +28,6 @@ export default function AdminPage() {
   }
 
   return (
-
     <div className={styles.log}>
       <h1>Profiles</h1>
       {profiles?.map((profile) => {
@@ -44,30 +43,13 @@ export default function AdminPage() {
         );
       })}
 
-    <div>
       <div>
-        <button onClick={displayCreate}>Create A new Product</button>
-        {showCreate === true ? <CreateProduct /> : null}
-      </div>
-
-      <div className={styles.container}>
-        <h3>User Information</h3>
-        {profiles?.map((profile) => {
-          return (
-            <Card
-              key={profile.id}
-              style={{ width: "30rem" }}
-              className={styles.card}
-            >
-              <h6>
-                Name: {profile.firstname} {profile.lastname}
-              </h6>
-              <h6>Username: {profile.username}</h6>
-              <h6>Email Address: {profile.email}</h6>
-              <h6>Phone Number: {profile.phoneNumber}</h6>
-            </Card>
-          );
-        })}
+        <div className={styles.create}>
+          <Button variant="dark" onClick={displayCreate}>
+            Create A new Product
+          </Button>
+          {showCreate === true ? <CreateProduct /> : null}
+        </div>
       </div>
     </div>
   );

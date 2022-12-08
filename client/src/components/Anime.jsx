@@ -36,7 +36,7 @@ export default function Cartoon() {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <div className={styles.Products}>
-        {products?.map((product) => {
+        {productsToDisplay?.map((product) => {
           if (product.categoryId === 1) {
             return (
               <div className={styles.box} key={product.id}>

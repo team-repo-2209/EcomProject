@@ -113,10 +113,10 @@ export default function CreateProduct() {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="dark" type="submit">
             Submit
           </Button>
-          <Button variant="primary" type="cancel">
+          <Button variant="dark" type="cancel">
             Cancel
           </Button>
         </Form>
