@@ -1,304 +1,70 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import useUsers from "../hooks/useUsers";
-import {
-  fetchProductById,
-  updateProduct,
-  deleteProduct,
-} from "../api/products";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import useCart from "../hooks/useCart";
-import eth from "../styles/eth.png";
-import styles from "../styles/SingleProduct.module.css";
+import { fetchAllUsers } from "../api/users";
+import CreateProduct from "./CreateProduct";
 
-export default function SingleProduct() {
+import styles from "../styles/Profile.module.css";
+
+export default function AdminPage() {
   const { user } = useUsers();
-  const { productId } = useParams();
+  const [profiles, setProfiles] = useState([]);
   const navigate = useNavigate();
-  const [singleProduct, setSingleProduct] = useState({});
-  const [productName, setProductName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [isAvailable, setIsAvailable] = useState(true);
-  const [categoryId, setCategoryId] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [showEdit, setShowEdit] = useState(false);
-  const [addedToCart, setAddedToCart] = useState(false);
-
-  const { addProduct, cart, setCart } = useCart();
-
-  console.log("CART IN SING PROD", cart);
+  const [showCreate, setShowCreate] = useState(false);
 
   useEffect(() => {
-    async function getProductById() {
-      const product = await fetchProductById(productId);
-      setSingleProduct(product);
-      setProductName(product.productName);
-      setDescription(product.description);
-      setPrice(product.price);
-      setIsAvailable(product.isAvailable);
-      setCategoryId(product.categoryId);
-      setImageUrl(product.imageUrl);
+    async function getAllUsers() {
+      const items = await fetchAllUsers();
+      console.log("item", items);
+      setProfiles(items);
     }
-
-    getProductById();
+    getAllUsers();
+    console.log("Profiles: ", profiles);
   }, []);
-  console.log(singleProduct);
-  async function handleDelete(id) {
-    const result = await deleteProduct(id);
-    navigate("/");
-  }
 
-  function displayEdit() {
-    setShowEdit(true);
+  function displayCreate() {
+    setShowCreate(true);
   }
 
   return (
-    <div>
-      {singleProduct && (
-        <div className={styles.box}>
-          <div>
-            <h1>Product Details</h1>
-            <img
-              className={styles.img}
-              src={singleProduct.imageUrl}
-              alt="Product"
-            />
-            <h3>{singleProduct.productName}</h3>
-            <h6>{singleProduct.description}</h6>
-            <h2>
-              <img src={eth} height={15} width={15} alt="Eth" />
-              .0
-              {singleProduct.price}
-            </h2>
+    <div className={styles.log}>
+      <h1>Profiles</h1>
+      {profiles?.map((profile) => {
+        return (
+          <div key={profile.id} className={styles.card}>
             <h6>
-              Available: {singleProduct.isAvailable === true ? "Yes" : "No"}
+              Name: {profile.firstname} {profile.lastname}
             </h6>
-            <Button
-              variant="dark"
-              onClick={() => {
-                navigate(`/`);
-              }}
-            >
-              Back
-
-            </Button>
+            <h6>Username: {profile.username}</h6>
+            <h6>Email Address: {profile.email}</h6>
+            <h6>Phone Number: {profile.phoneNumber}</h6>
           </div>
-          {user.username !== "admin" ? (
-            <Button
-              variant="dark"
-              onClick={() => {
-                addProduct(singleProduct);
-                navigate(`/Cart`);
-              }}
-            >
-              Add to Cart
-            </Button>
-          ) : null}
-          {user.username === "admin" ? (
-            <>
-              <Button variant="dark" onClick={displayEdit}>
-                Edit
-              </Button>
-              {showEdit === true ? (
-                <Form
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    window.location.reload();
-                    const result = await updateProduct(
-                      singleProduct.id,
-                      productName,
-                      description,
-                      price,
-                      isAvailable,
-                      imageUrl,
-                      categoryId
-                    );
-                  }}
-                >
-                  <div>
-                    <label>Product Name</label>
-                    <input
-                      value={productName}
-                      type="text"
-                      placeholder={singleProduct.productName}
-                      onChange={(e) => {
-                        setProductName(e.target.value);
-                      }}
-                    />
-                    <label>Description</label>
-                    <input
-                      value={description}
-                      type="text"
-                      placeholder={singleProduct.description}
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                      }}
-                    />
-                    <label>Price</label>
-                    <input
-                      value={price}
-                      type="text"
-                      placeholder={singleProduct.price}
-                      onChange={(e) => {
-                        setPrice(+e.target.value);
-                      }}
-                    />
-                    <label>Is the product in stock?</label>
-                    <input
-                      value={isAvailable}
-                      type="checkbox"
-                      onChange={(e) => {
-                        setIsAvailable(!isAvailable);
-                      }}
-                    />
-                    <label>Category Id</label>
-                    <input
-                      value={categoryId}
-                      type="text"
-                      placeholder={singleProduct.categoryId}
-                      onChange={(e) => {
-                        setCategoryId(e.target.value);
-                      }}
-                    />
-                    <label>Image URL</label>
-                    <input
-                      value={categoryId}
-                      type="text"
-                      placeholder={singleProduct.imageUrl}
-                      onChange={(e) => {
-                        setImageUrl(e.target.value);
-                      }}
-                    />
-                    <Button variant="dark" type="submit">
-                      Update
-                    </Button>
-                    <Button variant="dark">Cancel</Button>
-                  </div>
-                </Form>
-              ) : null}
-              <Button
-                variant="dark"
-                onClick={() => handleDelete(singleProduct.id)}
-              >
-                Delete
-              </Button>
-            </>
-          ) : null}
+        );
+      })}
+
+      <div>
+        <div>
+          <button onClick={displayCreate}>Create A new Product</button>
+          {showCreate === true ? <CreateProduct /> : null}
         </div>
-      )}
-    </div>
 
-            </button>
-
-            {user.username !== "admin" ? (
-              <>
-                {cart.order_products.filter((op) => {
-                  console.log({ op, singleProduct });
-                  return op.productId === singleProduct.id;
-                }).length ? (
-                  <h4>Already in Cart!</h4>
-                ) : (
-                  <button
-                    onClick={async () => {
-                      await addProduct(cart.id, singleProduct.id);
-                      navigate(`/cart`);
-                    }}
-                  >
-                    Add to Cart
-                  </button>
-                )}
-              </>
-            ) : null}
-
-            {user.username === "admin" ? (
-              <>
-                <button onClick={displayEdit}>Edit</button>
-                {showEdit === true ? (
-                  <Form
-                    onSubmit={async (e) => {
-                      e.preventDefault();
-                      window.location.reload();
-                      const result = await updateProduct(
-                        singleProduct.id,
-                        productName,
-                        description,
-                        price,
-                        isAvailable,
-                        imageUrl,
-                        categoryId
-                      );
-                    }}
-                  >
-                    <div>
-                      <label>Product Name</label>
-                      <input
-                        value={productName}
-                        type="text"
-                        placeholder={singleProduct.productName}
-                        onChange={(e) => {
-                          setProductName(e.target.value);
-                        }}
-                      />
-                      <label>Description</label>
-                      <input
-                        value={description}
-                        type="text"
-                        placeholder={singleProduct.description}
-                        onChange={(e) => {
-                          setDescription(e.target.value);
-                        }}
-                      />
-                      <label>Price</label>
-                      <input
-                        value={price}
-                        type="text"
-                        placeholder={singleProduct.price}
-                        onChange={(e) => {
-                          setPrice(+e.target.value);
-                        }}
-                      />
-                      <label>Is the product in stock?</label>
-                      <input
-                        value={isAvailable}
-                        type="checkbox"
-                        onChange={(e) => {
-                          setIsAvailable(!isAvailable);
-                        }}
-                      />
-                      <label>Category Id</label>
-                      <input
-                        value={categoryId}
-                        type="text"
-                        placeholder={singleProduct.categoryId}
-                        onChange={(e) => {
-                          setCategoryId(e.target.value);
-                        }}
-                      />
-                      <label>Image URL</label>
-                      <input
-                        value={categoryId}
-                        type="text"
-                        placeholder={singleProduct.imageUrl}
-                        onChange={(e) => {
-                          setImageUrl(e.target.value);
-                        }}
-                      />
-                      <button type="submit">Update</button>
-                      <button>Cancel</button>
-                    </div>
-                  </Form>
-                ) : null}
-                <button onClick={() => handleDelete(singleProduct.id)}>
-                  Delete
-                </button>
-              </>
-            ) : null}
-          </div>
-        )}
+        <div className={styles.container}>
+          <h3>User Information</h3>
+          {profiles?.map((profile) => {
+            return (
+              <div key={profile.id}>
+                <h6>
+                  Name: {profile.firstname} {profile.lastname}
+                </h6>
+                <h6>Username: {profile.username}</h6>
+                <h6>Email Address: {profile.email}</h6>
+                <h6>Phone Number: {profile.phoneNumber}</h6>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </Card>
-
+    </div>
   );
 }
