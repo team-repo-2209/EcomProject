@@ -89,7 +89,9 @@ export default function Register() {
             placeholder="Enter your phone number"
           />
           <div>
-            <Button type="submit">Register</Button>
+            <Button variant="dark" type="submit">
+              Register
+            </Button>
           </div>
         </div>
       </form>

@@ -4,8 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { logoutUser } from "../api/users";
-import logo from "../styles/logo.png";
-import home from "../styles/home.png";
+import main from "../styles/main.png";
 import styles from "../styles/NavBar.module.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -59,30 +58,18 @@ function NavBar() {
     return (
       <Navbar className={styles.background}>
         <div className={styles.header}>
-          <img src={logo} height={100} width={150} alt="Logo" />
-          <Link className={styles.welcome} to="/">
-            {" "}
+          <Link className={styles.img} to="/">
+            <img src={main} height={40} width={150} alt="Main" />
           </Link>
         </div>
-        <div className={styles.search}>
-          <Nav.Item>
-            <Link className={styles.home} to="/">
-              <img src={home} height={40} width={40} alt="Logo" />
-            </Link>
-          </Nav.Item>{" "}
-          <Nav.Item>
-            <input
-              className={styles.searchbar}
-              type="text"
-              value={searchTerm}
-              placeholder="Search..."
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </Nav.Item>
-        </div>
+
         <Nav.Item>
           <div className={styles.dropdown}>
-            <DropdownButton id="dropdown-item-button" title="Category">
+            <DropdownButton
+              variant="dark"
+              id="dropdown-item-button"
+              title="Choose Category"
+            >
               <Dropdown.Item as="button">
                 <Link to="/Category/Anime">Anime</Link>
               </Dropdown.Item>
@@ -110,7 +97,7 @@ function NavBar() {
             </Nav.Item>
             <Nav.Item>
               <Link className={styles.cart} to="/Cart">
-                <img src={cartshopper} height={40} width={40} alt="Logo" />
+                <img src={cartshopper} height={35} width={40} alt="Logo" />
               </Link>
             </Nav.Item>{" "}
           </>
@@ -125,33 +112,20 @@ function NavBar() {
     <>
       <Navbar className={styles.background}>
         <div className={styles.header}>
-          <img src={logo} height={100} width={150} alt="Logo" />
-          <Link className={styles.welcome} to="/">
-            {" "}
+          <Link className={styles.img} to="/">
+            <img src={main} height={40} width={150} alt="Main" />
           </Link>
           <Nav.Item className={styles.welcome}>
             Welcome, {user.username}{" "}
           </Nav.Item>
         </div>
-        <div className={styles.search}>
-          <Nav.Item>
-            <Link className={styles.home} to="/">
-              <img src={home} height={40} width={40} alt="Logo" />
-            </Link>
-          </Nav.Item>{" "}
-          <Nav.Item>
-            <input
-              className={styles.searchbar}
-              type="text"
-              value={searchTerm}
-              placeholder="Search..."
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </Nav.Item>
-        </div>
         <Nav.Item>
           <div className={styles.dropdown}>
-            <DropdownButton id="dropdown-item-button" title="Category">
+            <DropdownButton
+              variant="dark"
+              id="dropdown-item-button"
+              title="Choose Category"
+            >
               <Dropdown.Item as="button">
                 <Link to="/Category/Anime">Anime</Link>
               </Dropdown.Item>
@@ -191,7 +165,7 @@ function NavBar() {
         </Nav.Item>
         <Nav.Item>
           <Link className={styles.cart} to="/cart">
-            <img src={cartshopper} height={40} width={40} alt="Logo" />
+            <img src={cartshopper} height={35} width={40} alt="Logo" />
           </Link>
         </Nav.Item>{" "}
       </Navbar>

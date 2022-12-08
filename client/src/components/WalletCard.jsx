@@ -1,6 +1,7 @@
 import { useState } from "react";
-
-import Card from "react-bootstrap/Card";
+import styles from "../styles/Profile.module.css";
+import meta from "../styles/meta.png";
+import Button from "react-bootstrap/esm/Button";
 
 const WalletCard = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -25,17 +26,22 @@ const WalletCard = () => {
   };
 
   return (
-    <Card>
+    <div className={styles.walletCard}>
       <div className="WalletCard">
-        <h4> {"Connect to your crypto wallet!"} </h4>
-        <button onClick={connectWalletHandler}>{connButtonText}</button>
+        <h4> {"Connect crypto wallet"} </h4>
+        <Button variant="dark" onClick={connectWalletHandler}>
+          {connButtonText}
+        </Button>
         <div className="account">
-          <h3>Account Address: {defaultAccount}</h3>
+          <div>
+            <img src={meta} height={80} width={80} alt="Meta" />
+          </div>
+          <h3>{defaultAccount}</h3>
         </div>
 
         {errorMessage}
       </div>
-    </Card>
+    </div>
   );
 };
 

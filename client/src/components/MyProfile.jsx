@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import useUsers from "../hooks/useUsers";
 import { fetchMe, updateUser } from "../api/users";
 import WalletCard from "./WalletCard";
 import CreateProduct from "./CreateProduct";
-
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
+import styles from "../styles/Profile.module.css";
+import { logoutUser } from "../api/users";
 
 export default function MyProfile() {
   const { user } = useUsers();
@@ -42,14 +41,16 @@ export default function MyProfile() {
   }
 
   return (
-    <div>
+    <div className={styles.background}>
       {user.username === "admin" ? (
         <div>
-          <button onClick={displayCreate}>Create A new Product</button>
+          <Button variant="Dark" onClick={displayCreate}>
+            Create A new Product
+          </Button>
           {showCreate === true ? <CreateProduct /> : null}
         </div>
       ) : null}
-      <Card style={{ width: "25rem" }}>
+      <div>
         <Form
           onSubmit={async (e) => {
             e.preventDefault();
@@ -65,8 +66,12 @@ export default function MyProfile() {
             console.log("Updated Profile: ", result);
           }}
         >
-          <h3>View & Edit Profile</h3>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <div className={styles.header}>
+            <h1>My Profile</h1>
+          </div>
+          <Form.Group className={styles.log}>
+            <h3>View & Edit Profile</h3>
+
             <Form.Label>Username</Form.Label>
             <Form.Control
               value={username}
@@ -121,23 +126,43 @@ export default function MyProfile() {
                 setPhoneNumber(+e.target.value);
               }}
             />
+            <Button variant="dark" type="submit">
+              Update
+            </Button>
           </Form.Group>
-          <Button variant="secondary" type="submit">
-            Update
-          </Button>
         </Form>
-      </Card>
-      <div>
+      </div>
+
+      <div className={styles.buttons}>
         {user.username !== "admin" ? (
-          <div>
+          <div className={styles.buttons}>
             <WalletCard />
-            <button
+            <Button
+              variant="dark"
               onClick={() => {
                 navigate(`/myProfile/myOrders`);
               }}
             >
-              View all My Orders
-            </button>
+              <h5 classname={styles.order}> View Orders</h5>
+            </Button>
+            <Button
+              variant="dark"
+              onClick={() => {
+                navigate(`/Cart`);
+              }}
+            >
+              <h5 classname={styles.order}> View Cart</h5>
+            </Button>
+            <Button
+              variant="dark"
+              onClick={async () => {
+                localStorage.removeItem("user");
+                await logoutUser();
+                navigate("/user/login");
+              }}
+            >
+              <h5 classname={styles.order}> Logout</h5>
+            </Button>
           </div>
         ) : null}
       </div>

@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useUsers from "../hooks/useUsers";
 import { fetchAllUsers } from "../api/users";
 
-import styles from "../styles/Register.module.css";
-import Card from "react-bootstrap/Card";
+import styles from "../styles/Profile.module.css";
 
 export default function AdminPage() {
   const { user } = useUsers();
@@ -23,21 +22,18 @@ export default function AdminPage() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.log}>
+      <h1>Profiles</h1>
       {profiles?.map((profile) => {
         return (
-          <Card
-            key={profile.id}
-            style={{ width: "30rem" }}
-            className={styles.card}
-          >
+          <div key={profile.id} className={styles.card}>
             <h6>
               Name: {profile.firstname} {profile.lastname}
             </h6>
             <h6>Username: {profile.username}</h6>
             <h6>Email Address: {profile.email}</h6>
             <h6>Phone Number: {profile.phoneNumber}</h6>
-          </Card>
+          </div>
         );
       })}
     </div>

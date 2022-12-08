@@ -1,10 +1,7 @@
 @import url("https://fonts.cdnfonts.com/css/marvel");
 
 .Products {
-  margin-top: 10px;
-  margin-bottom: 20px;
   font-family: "Marvel", sans-serif;
-  width: 100vh;
   color: white;
   display: flex;
   flex-wrap: wrap;
@@ -18,16 +15,23 @@
 }
 
 .box {
-  margin-left: 10vh;
+  font-family: "Marvel", sans-serif;
+  margin-right: 8vh;
+  margin-left: 8vh;
   border-radius: 2vh;
   margin-bottom: 5vh;
-  margin-top: 140px;
+  margin-top: 75px;
   height: 40vh;
   width: 22vh;
   border: 0.5vh solid rgb(202, 129, 123);
-  background-color: rgb(170, 45, 33);
+  background-image: linear-gradient(rgb(249, 54, 36), rgb(144, 37, 28));
   border-style: outset;
   box-shadow: 5px 10px rgb(8, 0, 0);
+}
+
+.box:hover {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .head {
@@ -37,6 +41,19 @@
 .button {
   border-radius: 2vh;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  background-color: rgb(17, 40, 104);
+  background-color: rgb(43, 43, 43);
   color: white;
+}
+
+.searchbar {
+  margin-left: 3vh;
+  margin-top: 2vh;
+  font-family: "Marvel", sans-serif;
+  margin-right: 2vh;
+  border-radius: 1vh;
+  width: 40vh;
+}
+
+.logo {
+  margin-top: 5vh;
 }

@@ -6,10 +6,11 @@ import {
   updateProduct,
   deleteProduct,
 } from "../api/products";
-import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useCart from "../hooks/useCart";
 import eth from "../styles/eth.png";
+import styles from "../styles/SingleProduct.module.css";
 
 export default function SingleProduct() {
   const { user } = useUsers();
@@ -51,124 +52,138 @@ export default function SingleProduct() {
   }
 
   return (
-    <Card>
-      <div>
-        {singleProduct && (
+    <div>
+      {singleProduct && (
+        <div className={styles.box}>
           <div>
-            <img src={singleProduct.imageUrl} alt="Product" />
-            <h6>{singleProduct.productName}</h6>
+            <h1>Product Details</h1>
+            <img
+              className={styles.img}
+              src={singleProduct.imageUrl}
+              alt="Product"
+            />
+            <h3>{singleProduct.productName}</h3>
             <h6>{singleProduct.description}</h6>
-            <h6>
+            <h2>
               <img src={eth} height={15} width={15} alt="Eth" />
               .0
               {singleProduct.price}
-            </h6>
+            </h2>
             <h6>
-              In Stock?: {singleProduct.isAvailable === true ? "Yes" : "No"}
+              Available: {singleProduct.isAvailable === true ? "Yes" : "No"}
             </h6>
-            <button
+            <Button
+              variant="dark"
               onClick={() => {
                 navigate(`/`);
               }}
             >
               Back
-            </button>
-            {user.username !== "admin" ? (
-              <button
-                onClick={() => {
-                  addProduct(singleProduct);
-                  navigate(`/Cart`);
-                }}
-              >
-                Add to Cart
-              </button>
-            ) : null}
-            {user.username === "admin" ? (
-              <>
-                <button onClick={displayEdit}>Edit</button>
-                {showEdit === true ? (
-                  <Form
-                    onSubmit={async (e) => {
-                      e.preventDefault();
-                      window.location.reload();
-                      const result = await updateProduct(
-                        singleProduct.id,
-                        productName,
-                        description,
-                        price,
-                        isAvailable,
-                        imageUrl,
-                        categoryId
-                      );
-                    }}
-                  >
-                    <div>
-                      <label>Product Name</label>
-                      <input
-                        value={productName}
-                        type="text"
-                        placeholder={singleProduct.productName}
-                        onChange={(e) => {
-                          setProductName(e.target.value);
-                        }}
-                      />
-                      <label>Description</label>
-                      <input
-                        value={description}
-                        type="text"
-                        placeholder={singleProduct.description}
-                        onChange={(e) => {
-                          setDescription(e.target.value);
-                        }}
-                      />
-                      <label>Price</label>
-                      <input
-                        value={price}
-                        type="text"
-                        placeholder={singleProduct.price}
-                        onChange={(e) => {
-                          setPrice(+e.target.value);
-                        }}
-                      />
-                      <label>Is the product in stock?</label>
-                      <input
-                        value={isAvailable}
-                        type="checkbox"
-                        onChange={(e) => {
-                          setIsAvailable(!isAvailable);
-                        }}
-                      />
-                      <label>Category Id</label>
-                      <input
-                        value={categoryId}
-                        type="text"
-                        placeholder={singleProduct.categoryId}
-                        onChange={(e) => {
-                          setCategoryId(e.target.value);
-                        }}
-                      />
-                      <label>Image URL</label>
-                      <input
-                        value={categoryId}
-                        type="text"
-                        placeholder={singleProduct.imageUrl}
-                        onChange={(e) => {
-                          setImageUrl(e.target.value);
-                        }}
-                      />
-                      <button type="submit">Update</button>
-                      <button>Cancel</button>
-                    </div>
-                  </Form>
-                ) : null}
-                <button onClick={() => handleDelete(singleProduct.id)}>
-                  Delete
-                </button>
-              </>
-            ) : null}
+            </Button>
           </div>
-        )}
-      </div>
-    </Card>
+          {user.username !== "admin" ? (
+            <Button
+              variant="dark"
+              onClick={() => {
+                addProduct(singleProduct);
+                navigate(`/Cart`);
+              }}
+            >
+              Add to Cart
+            </Button>
+          ) : null}
+          {user.username === "admin" ? (
+            <>
+              <Button variant="dark" onClick={displayEdit}>
+                Edit
+              </Button>
+              {showEdit === true ? (
+                <Form
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    window.location.reload();
+                    const result = await updateProduct(
+                      singleProduct.id,
+                      productName,
+                      description,
+                      price,
+                      isAvailable,
+                      imageUrl,
+                      categoryId
+                    );
+                  }}
+                >
+                  <div>
+                    <label>Product Name</label>
+                    <input
+                      value={productName}
+                      type="text"
+                      placeholder={singleProduct.productName}
+                      onChange={(e) => {
+                        setProductName(e.target.value);
+                      }}
+                    />
+                    <label>Description</label>
+                    <input
+                      value={description}
+                      type="text"
+                      placeholder={singleProduct.description}
+                      onChange={(e) => {
+                        setDescription(e.target.value);
+                      }}
+                    />
+                    <label>Price</label>
+                    <input
+                      value={price}
+                      type="text"
+                      placeholder={singleProduct.price}
+                      onChange={(e) => {
+                        setPrice(+e.target.value);
+                      }}
+                    />
+                    <label>Is the product in stock?</label>
+                    <input
+                      value={isAvailable}
+                      type="checkbox"
+                      onChange={(e) => {
+                        setIsAvailable(!isAvailable);
+                      }}
+                    />
+                    <label>Category Id</label>
+                    <input
+                      value={categoryId}
+                      type="text"
+                      placeholder={singleProduct.categoryId}
+                      onChange={(e) => {
+                        setCategoryId(e.target.value);
+                      }}
+                    />
+                    <label>Image URL</label>
+                    <input
+                      value={categoryId}
+                      type="text"
+                      placeholder={singleProduct.imageUrl}
+                      onChange={(e) => {
+                        setImageUrl(e.target.value);
+                      }}
+                    />
+                    <Button variant="dark" type="submit">
+                      Update
+                    </Button>
+                    <Button variant="dark">Cancel</Button>
+                  </div>
+                </Form>
+              ) : null}
+              <Button
+                variant="dark"
+                onClick={() => handleDelete(singleProduct.id)}
+              >
+                Delete
+              </Button>
+            </>
+          ) : null}
+        </div>
+      )}
+    </div>
   );
 }

@@ -1,0 +1,54 @@
+@import url("https://fonts.cdnfonts.com/css/marvel");
+
+.background {
+  height: 100vh;
+  color: white;
+  display: flex;
+  align-items: flex-start;
+}
+
+.log {
+  font-family: "Marvel", sans-serif;
+  color: white;
+  justify-content: center;
+  border-radius: 2vh;
+  margin-top: 60px;
+  margin-bottom: 2vh;
+  align-items: flex-start;
+  width: 40vh;
+  border: 0.5vh solid rgb(202, 129, 123);
+  background-color: rgb(170, 45, 33);
+  border-style: outset;
+  box-shadow: 5px 10px rgb(8, 0, 0);
+  margin-left: 45%;
+}
+
+.header {
+  margin-left: 100vh;
+  font-family: "Marvel", sans-serif;
+}
+
+.walletCard {
+  font-family: "Marvel", sans-serif;
+  margin-right: 8vh;
+  margin-left: 8vh;
+  border-radius: 2vh;
+  margin-bottom: 5vh;
+  margin-top: 60px;
+  height: 20vh;
+  width: 30vh;
+  border: 0.5vh solid rgb(202, 129, 123);
+  background-color: rgb(170, 45, 33);
+  border-style: outset;
+  box-shadow: 5px 10px rgb(8, 0, 0);
+}
+
+.order {
+  font-family: "Marvel", sans-serif;
+  margin-bottom: 3vh;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
